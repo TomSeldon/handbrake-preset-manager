@@ -1,0 +1,28 @@
+@import "./_variables";
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #eee;
+    background-image: url('/assets/img/bg.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+a,
+a:link,
+a:active,
+a:visited,
+a:hover {
+    color: @link-color;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+a:hover {
+    color: @link-color-hover;
+}

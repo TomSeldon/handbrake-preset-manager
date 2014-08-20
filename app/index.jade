@@ -1,0 +1,44 @@
+doctype html
+
+html(lang=en, data-ng-app='hpm')
+    head
+        title {{ $state.current.name }}
+
+        //- Base styles
+        link(rel='stylesheet', href='/vendor/semantic-ui/build/packaged/css/semantic.min.css')
+        link(rel='stylesheet', href='/assets/css/app.css')
+
+        block headerScripts
+
+    body
+        .ui.page.grid
+            .ui.pointing.menu.teal.inverted
+                a(
+                    data-ui-sref="presets",
+                    data-ui-sref-active="active",
+                    class="item"
+                )
+                    i.icon.tasks
+                    span Presets
+
+                a(
+                    data-ui-sref="categories",
+                    data-ui-sref-active="active",
+                    class="item"
+                )
+                    i.icon.tags
+                    span Categories
+
+            #view(data-ui-view='')
+
+        block footerScripts
+            //- Vendor script(s)
+            script(src='//code.jquery.com/jquery-2.1.1.min.js')
+            script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js')
+            script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js')
+            script(src='/vendor/breezejs/breeze.min.js')
+            script(src='/vendor/breezejs/labs/breeze.angular.js')
+            script(src='/vendor/semantic-ui/build/packaged/javascript/semantic.min.js')
+
+            //- App script(s)
+            script(src='/assets/js/app.min.js')
