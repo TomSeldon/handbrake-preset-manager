@@ -1,15 +1,15 @@
 'use strict';
 
-goog.provide('hpm.presets.detail.Ctrl');
+goog.provide('hpm.categories.detail.Ctrl');
 
 /**
- * Detail controller for presets.
+ * Detail controller for categories.
  *
  * @constructor
  * @ngInject
  * @param {ui.router.$stateParams} $stateParams
  */
-hpm.presets.detail.Ctrl = function($stateParams)
+hpm.categories.detail.Ctrl = function($stateParams)
 {
     /**
      * @type {integer}
@@ -20,7 +20,7 @@ hpm.presets.detail.Ctrl = function($stateParams)
 /**
  * @return {integer}
  */
-hpm.presets.detail.Ctrl.prototype.getId = function()
+hpm.categories.detail.Ctrl.prototype.getId = function()
 {
     return this.id;
 };

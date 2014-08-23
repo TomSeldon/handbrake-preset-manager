@@ -1,0 +1,34 @@
+.ui.one.column.grid.presets
+    .column
+        h1.ui.header Categories
+        table.ui.three.column.table.basic
+            thead
+                tr
+                    th.ten.wide Name
+                    th.six.wide Actions
+            tbody
+                tr.no-categories(data-ng-if="!categories.categoryList")
+                    td.negative(colspan="3")
+                        | No categories found.
+
+                tr.category(data-ng-repeat="category in categories.categoryList")
+                    td
+                        a(data-ui-sref="categories.detail({id: category.id})")
+                            | {{ category.name }}
+
+                    td
+                        .ui.buttons.mini
+                            a.ui.labeled.button.icon(
+                                title="Edit Category",
+                                data-popup="",
+                                data-ui-sref="categories.detail({id: category.id})"
+                            )
+                                i.edit.icon
+                                | Edit
+                            .or
+                            .ui.labeled.negative.button.icon(
+                                title="Delete category",
+                                data-popup=""
+                            )
+                                i.remove.icon
+                                | Delete

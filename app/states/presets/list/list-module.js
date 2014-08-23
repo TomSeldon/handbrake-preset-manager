@@ -2,6 +2,9 @@
 
 goog.provide('hpm.presets.list.module');
 
+goog.require('hpm.presets.list.Ctrl');
+goog.require('hpm.semanticui.popup.Directive.factory');
+
 /**
  * @type {angular.Module}
  */
@@ -16,11 +19,15 @@ hpm.presets.list.module = angular.module('presets.list', [
 hpm.presets.list.module.configuration = function($stateProvider)
 {
     $stateProvider.state('presets.list', {
-        url: '/list',
+        'url': '',
 
-        templateUrl: '/states/presets/list/list.jade'
+        'templateUrl': '/states/presets/list/list.jade',
+
+        'controller': 'PresetsListCtrl as presets'
     });
 };
 
 hpm.presets.list.module
-    .config(hpm.presets.list.module.configuration);
+    .config(hpm.presets.list.module.configuration)
+    .controller('PresetsListCtrl', hpm.presets.list.Ctrl)
+    .directive('popup', hpm.semanticui.popup.Directive.factory);

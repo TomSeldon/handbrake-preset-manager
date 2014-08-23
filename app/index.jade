@@ -9,12 +9,13 @@ html(lang=en, data-ng-app='hpm')
         link(rel='stylesheet', href='/assets/css/app.css')
 
         block headerScripts
+            != LRScript
 
     body
         .ui.page.grid
             .ui.pointing.menu.teal.inverted
                 a(
-                    data-ui-sref="presets",
+                    data-ui-sref="presets.list",
                     data-ui-sref-active="active",
                     class="item"
                 )
@@ -22,7 +23,7 @@ html(lang=en, data-ng-app='hpm')
                     span Presets
 
                 a(
-                    data-ui-sref="categories",
+                    data-ui-sref="categories.list",
                     data-ui-sref-active="active",
                     class="item"
                 )

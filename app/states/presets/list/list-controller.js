@@ -1,14 +1,14 @@
 'use strict';
 
-goog.provide('hpm.presets.Ctrl');
+goog.provide('hpm.presets.list.Ctrl');
 
 /**
- * Presets controller.
+ * Presets list controller.
  *
  * @constructor
  * @ngInject
  */
-hpm.presets.Ctrl = function()
+hpm.presets.list.Ctrl = function()
 {
     /**
      * @type {array}

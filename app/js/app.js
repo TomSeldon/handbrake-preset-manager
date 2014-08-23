@@ -1,5 +1,6 @@
 'use strict';
 
+goog.require('hpm.categories.module');
 goog.require('hpm.presets.module');
 goog.require('hpm.semanticui.popup.Directive.factory');
 
@@ -12,6 +13,7 @@ angular.module('hpm', [
         'breeze.angular',
 
         // Internal dependencies
+        hpm.categories.module.name,
         hpm.presets.module.name
     ]
 )
@@ -26,5 +28,5 @@ angular.module('hpm', [
  * @ngInject
  */
 function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/presets');
+   // $urlRouterProvider.otherwise('/presets');
 }

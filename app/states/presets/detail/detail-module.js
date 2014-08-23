@@ -20,11 +20,11 @@ hpm.presets.detail.module = angular.module('presets.detail', [
 hpm.presets.detail.module.configuration = function($stateProvider)
 {
     $stateProvider.state('presets.detail', {
-        url: '/{presetId:[0-9]{1,4}}',
+        'url': '/{id:[0-9]{1,4}}',
 
-        templateUrl: 'states/presets/detail/detail.jade',
+        'templateUrl': '/states/presets/detail/detail.jade',
 
-        controller: 'PresetDetailCtrl as presetDetail'
+        'controller': 'PresetDetailCtrl as presetDetail'
     });
 };
 

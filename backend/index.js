@@ -28,9 +28,17 @@ app.use('/vendor', express.static(
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Logger
+// Development settings
 if (env === 'development') {
+    var livereload = require('express-livereload');
+
+    // Logger
     app.use(logger('dev'));
+
+    // Livereload
+    livereload(app, {
+        watchDir: __dirname + '/../app'
+    });
 }
 
 // Init routes
