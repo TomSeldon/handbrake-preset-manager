@@ -15,6 +15,7 @@
 goog.provide('hpm.breeze.metadata');
 
 goog.require('hpm.breeze.metadata.Category');
+goog.require('hpm.breeze.metadata.Preset');
 
 /**
  * todo Replace structural types with injected properties
@@ -32,8 +33,13 @@ hpm.metadata = {
     ],
 
     'structuralTypes': [
-        hpm.breeze.type.Category
-        // hpm.breeze.type.Preset
-    ]
+        hpm.breeze.type.Category,
+        hpm.breeze.type.Preset
+    ],
+
+    'resourceEntityMap': {
+        'Categories': 'Category:#Hpm.Model',
+        'Presets': 'Preset:#Hpm.Model'
+    }
 
 };
