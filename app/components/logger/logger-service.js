@@ -57,7 +57,7 @@ hpm.logger.Service.prototype.success = function(message, title)
 /**
  * Log directly to console.
  *
- * @param {string} message
+ * @param {string|string[]} message
  */
 hpm.logger.Service.prototype.log = function(message)
 {

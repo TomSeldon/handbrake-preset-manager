@@ -38,8 +38,8 @@ hpm.metadata = {
     ],
 
     'resourceEntityMap': {
-        'Categories': 'Category:#Hpm.Model',
-        'Presets': 'Preset:#Hpm.Model'
+        'Categories': 'Category:#hpm.Model',
+        'Presets': 'Preset:#hpm.Model'
     }
 
 };

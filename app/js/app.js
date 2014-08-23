@@ -1,6 +1,9 @@
 'use strict';
 
+goog.require('hpm.breeze.Config');
 goog.require('hpm.categories.module');
+goog.require('hpm.debug.state.module');
+//goog.require('hpm.environment.Factory');
 goog.require('hpm.logger.module');
 goog.require('hpm.presets.module');
 goog.require('hpm.semanticui.popup.Directive.factory');
@@ -16,6 +19,7 @@ angular.module('hpm', [
         // Internal dependencies
         // Components
         hpm.logger.module.name,
+        hpm.debug.state.module.name,
 
         // States
         hpm.categories.module.name,
@@ -23,15 +27,11 @@ angular.module('hpm', [
     ]
 )
 .config(config)
+//.factory('environment', hpm.environment.Factory)
 .directive('popup', hpm.semanticui.popup.Directive.factory);
 
 /**
  * Configuration function.
- *
- * @param {ui.router.$stateProvider} $stateProvider
- * @param {ui.router.$urlRouterProvider} $urlRouterProvider
  * @ngInject
  */
-function config($stateProvider, $urlRouterProvider) {
-   // $urlRouterProvider.otherwise('/presets');
-}
+function config() {}
