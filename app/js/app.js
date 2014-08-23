@@ -1,6 +1,7 @@
 'use strict';
 
 goog.require('hpm.categories.module');
+goog.require('hpm.logger.module');
 goog.require('hpm.presets.module');
 goog.require('hpm.semanticui.popup.Directive.factory');
 
@@ -10,9 +11,13 @@ goog.require('hpm.semanticui.popup.Directive.factory');
 angular.module('hpm', [
         // Vendor dependencies
         'ui.router',
-        'breeze.angular',
+        'breeze.directives',
 
         // Internal dependencies
+        // Components
+        hpm.logger.module.name,
+
+        // States
         hpm.categories.module.name,
         hpm.presets.module.name
     ]

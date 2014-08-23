@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     chalk = require('chalk'),
     expand = require('glob-expand'),
     concat = require('gulp-concat'),
-    closure = require('gulp-closure-compiler'),
+    closure = require('closure-compiler-stream'),
     paths = require('../gulp-helpers/paths');
 
 gulp.task('compile', function() {
@@ -12,36 +12,39 @@ gulp.task('compile', function() {
 
     closureOptions = {
 
-        compilerPath: paths.vendor +
+        jar: paths.vendor +
             '/closure-compiler/lib/vendor/compiler.jar',
 
-        fileName: paths.build.filename,
+        compilation_level: 'ADVANCED_OPTIMIZATIONS',
 
-        compilerFlags: {
+        language_in: 'ECMASCRIPT5_STRICT',
 
-            compilation_level: 'ADVANCED_OPTIMIZATIONS',
+        angular_pass: true,
 
-            language_in: 'ECMASCRIPT5_STRICT',
+        externs: [
+            paths.vendor +
+                '/closure-compiler-git/contrib/externs/angular-1.2.js',
 
-            angular_pass: true,
+            paths.vendor +
+                '/closure-compiler-git/contrib/externs/jquery-1.9.js',
 
-            externs: [
-                paths.vendor +
-                    '/closure-compiler-git/contrib/externs/angular-1.2.js',
+            __dirname + '/../custom-externs/semantic-ui.js'
+        ],
 
-                paths.vendor +
-                    '/closure-compiler-git/contrib/externs/jquery-1.9.js',
+        create_source_map: paths.build.directory +
+            '/' + paths.build.filename + '.map',
 
-                __dirname + '/../custom-externs/semantic-ui.js'
-            ],
+        source_map_format: 'V3',
 
-            generate_exports: true,
+        generate_exports: true,
 
-            manage_closure_dependencies: true,
+        manage_closure_dependencies: true,
 
-            js_output_file: paths.build
+        js_output_file: paths.build.directory + '/' +
+            paths.build.filename,
 
-        }
+        output_wrapper: '(function(){%output%})()' +
+            '//# sourceMappingURL=/assets/js/app.min.js.map'
 
     };
 

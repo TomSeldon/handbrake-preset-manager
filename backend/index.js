@@ -22,6 +22,7 @@ app.set('views', path.resolve(__dirname + '/../app'));
 app.use('/assets', express.static(
     path.resolve(__dirname + '/../build')
 ));
+
 app.use('/vendor', express.static(
     path.resolve(__dirname + '/../bower_components')
 ));
@@ -39,6 +40,11 @@ if (env === 'development') {
     livereload(app, {
         watchDir: __dirname + '/../app'
     });
+
+    // Service source files (for source map usage)
+    app.use(process.cwd(), express.static(
+        path.resolve(process.cwd())
+    ));
 }
 
 // Init routes

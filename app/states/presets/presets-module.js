@@ -30,7 +30,7 @@ hpm.presets.module.configuration = function($stateProvider)
 
             'url': '/presets',
 
-            'template': '<div data-ui-view=""></div>'
+            'templateUrl': '/states/presets/presets.jade'
         });
 };
 
