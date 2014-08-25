@@ -21,8 +21,31 @@ function errorHandler(err, req, res, next)
             body.saveResult = err.saveResult;
         }
 
-        res
-            .status(statusCode)
-            .send(body);
+        logToConsole(err, statusCode, body);
+
+        res.status(statusCode).send(body);
     }
+}
+
+function logToConsole(err, status, body) {
+    var stack = [];
+
+    stack.push('Status: ' + status);
+
+    if (typeof body === 'string') {
+        stack.push(body);
+    } else {
+        stack.push(JSON.stringify(body));
+    }
+
+    while (err) {
+        stack = err.stack || '';
+        err = err.innerError;
+
+        if (err && err.message) {
+            stack.push(err.message);
+        }
+    }
+
+    //stack.forEach(console.log);
 }

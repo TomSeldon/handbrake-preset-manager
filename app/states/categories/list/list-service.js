@@ -16,6 +16,16 @@ hpm.categories.list.Service = function(dataService)
 };
 
 /**
+ * @param {*} categoryEntity
+ * @return {Promise}
+ */
+hpm.categories.list.Service.prototype.save = function(categoryEntity)
+{
+    return this.dataService.entityManager
+        .saveChanges();
+};
+
+/**
  * @return {breeze.EntityQuery}
  */
 hpm.categories.list.Service.prototype.createQuery = function()

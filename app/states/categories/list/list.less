@@ -1,7 +1,17 @@
-.presets {
+.categories {
     table {
-        tr.no-presets {
+        transition: opacity 0.2s ease-in-out;
+
+        tr.no-categories {
             text-align: center;
         }
+    }
+
+    table.loading {
+        opacity: 0.2;
+    }
+
+    a.edit {
+        cursor: pointer;
     }
 }

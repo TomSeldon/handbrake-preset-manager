@@ -12,7 +12,7 @@ function configureRoutes(app) {
 
     app.get('/breeze/hpm/Lookups', getLookups);
     app.get('/breeze/hpm/Metadata', getMetadata);
-    app.get('/breeze/hpm/SaveChanges', saveChanges);
+    app.post('/breeze/hpm/SaveChanges', saveChanges);
     app.get('/breeze/hpm/:resource', getQuery);
 
     /**
@@ -94,8 +94,8 @@ function configureRoutes(app) {
      * @param {Function} next
      */
     function saveChanges(req, res, next) {
-        var saveResponeHandler = makeResponseHandler(res, next);
+        var saveResponseHandler = makeResponseHandler(res, next);
 
-        repository.saveChanges(req.body, saveResponeHandler);
+        repository.saveChanges(req.body, saveResponseHandler);
     }
 }

@@ -1,42 +1,48 @@
-.ui.one.column.grid.presets
-    .column
-        h1.ui.header Categories
-        p(data-ng-if="categories.isLoading") test
-        table.ui.three.column.table.basic
-            thead
-                tr
-                    th.ten.wide Name
-                    th.six.wide Actions
-            tbody
-                //- Loading
-                tr.loading(data-ng-if="categories.isLoading")
-                    td.warning(colspan="3")
-                        | Loading categories...
+.column
+    h1.ui.header Categories
 
-                //- No presets
-                tr.no-categories(data-ng-if="!categories.categoryList.length && !categories.isLoading")
-                    td.negative(colspan="3")
-                        | No categories found.
+    table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoading}")
+        thead
+            tr
+                th.ten.wide Name
+                th.six.wide Actions
+        tbody
+            //- No categories
+            tr.no-categories(data-ng-if="!categories.categoryList.length && !categories.isLoading")
+                td.negative(colspan="3")
+                    | No categories found.
 
-                //- Preset list
-                tr.category(data-ng-repeat="category in categories.categoryList")
-                    td
-                        a(data-ui-sref="categories.detail({id: category._id})")
-                            | {{ category.name }}
+            //- Categories list
+            tr.category(data-ng-repeat="category in categories.categoryList", data-ui-view="")
+                td
+                    //- Link to edit
+                    a.edit(data-ng-hide="category.beingEdited", data-ng-click="categories.edit(category)")
+                        | {{ category.name }}
 
-                    td
-                        .ui.buttons.mini
-                            a.ui.labeled.button.icon(
-                                title="Edit Category",
-                                data-popup="",
-                                data-ui-sref="categories.detail({id: category._id})"
-                            )
-                                i.edit.icon
-                                | Edit
-                            .or
-                            .ui.labeled.negative.button.icon(
-                                title="Delete category",
-                                data-popup=""
-                            )
-                                i.remove.icon
-                                | Delete
+                    //- Edit form
+                    .ui.input(data-ng-show="category.beingEdited")
+                        input(data-ng-model="category.name")
+
+                td
+                    .ui.buttons.mini
+                        a.ui.teal.labeled.button.icon(
+                            title="Save",
+                            data-ng-click="categories.save(category)"
+                        )
+                            i.save.icon
+                            | Save
+
+                        a.ui.labeled.button.icon(
+                            title="Edit Category",
+                            data-ng-click="categories.edit(category)"
+                        )
+                            i.edit.icon
+                            | Edit
+
+                        .or
+
+                        .ui.labeled.negative.button.icon(
+                            title="Delete category"
+                        )
+                            i.remove.icon
+                            | Delete

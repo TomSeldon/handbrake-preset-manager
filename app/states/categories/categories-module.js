@@ -2,7 +2,6 @@
 
 goog.provide('hpm.categories.module');
 
-goog.require('hpm.categories.detail.module');
 goog.require('hpm.categories.list.module');
 
 /**
@@ -12,7 +11,6 @@ goog.require('hpm.categories.list.module');
  */
 hpm.categories.module = angular.module('categories', [
     'ui.router',
-    hpm.categories.detail.module.name,
     hpm.categories.list.module.name
 ]);
 
@@ -30,7 +28,7 @@ hpm.categories.module.configuration = function($stateProvider)
 
             'url': '/categories',
 
-            'template': '<div data-ui-view=""></div>'
+            'templateUrl': '/states/categories/categories.jade'
         });
 };
 

@@ -28,6 +28,7 @@ app.use('/vendor', express.static(
     path.resolve(__dirname + '/../bower_components')
 ));
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Development settings

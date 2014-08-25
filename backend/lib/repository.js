@@ -149,6 +149,7 @@ function saveChanges(saveBundle, next) {
         var saveProcessor = new bmongo.MongoSaveHandler(db, saveBundle, next);
 
         setSaveMetadata(saveProcessor.metadata);
+
         saveProcessor.save();
     }
 }

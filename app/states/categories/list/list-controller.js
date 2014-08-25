@@ -56,6 +56,7 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
      * @this {hpm.categories.list.Ctrl}
      */
     function onSuccess(data) {
+        console.log(data.results);
         this.categoryList = data.results;
     }
 
@@ -87,4 +88,28 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
         .then(
             onComplete.bind(this)
         );
+};
+
+/**
+ * Save a single category.
+ *
+ * @param {*} category
+ */
+hpm.categories.list.Ctrl.prototype.save = function(category)
+{
+    this.categoriesService.save(category)
+        .then(function() {
+            this.logger.success(
+                'Successfully saved category "' + category.name + '"',
+                'Saved Category'
+            );
+        }.bind(this));
+};
+
+/**
+ * @param {*} category
+ */
+hpm.categories.list.Ctrl.prototype.edit = function(category)
+{
+    category.beingEdited = true;
 };
