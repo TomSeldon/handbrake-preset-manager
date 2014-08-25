@@ -47,5 +47,5 @@ function logToConsole(err, status, body) {
         }
     }
 
-    //stack.forEach(console.log);
+    stack.forEach(console.log);
 }

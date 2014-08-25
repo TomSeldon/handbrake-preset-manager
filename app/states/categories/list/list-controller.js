@@ -7,7 +7,7 @@ goog.provide('hpm.categories.list.Ctrl');
  *
  * @param {hpm.categories.list.Service} CategoriesListService
  * @param {hpm.util.logger} logger
- * @constructor
+ * @    constructor
  * @ngInject
  */
 hpm.categories.list.Ctrl = function(CategoriesListService, logger)
@@ -56,7 +56,6 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
      * @this {hpm.categories.list.Ctrl}
      */
     function onSuccess(data) {
-        console.log(data.results);
         this.categoryList = data.results;
     }
 
@@ -91,9 +90,24 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
 };
 
 /**
+ * Cancel changes made to category.
+ * Uses Breeze method `rejectChanges`.
+ * See: http://www.breezejs.com/documentation/inside-entity
+ *
+ * @param {*} category
+ * @expose
+ */
+hpm.categories.list.Ctrl.prototype.cancel = function(category)
+{
+    category.entityAspect.rejectChanges();
+    category.beingEdited = false;
+};
+
+/**
  * Save a single category.
  *
  * @param {*} category
+ * @expose
  */
 hpm.categories.list.Ctrl.prototype.save = function(category)
 {
@@ -103,11 +117,16 @@ hpm.categories.list.Ctrl.prototype.save = function(category)
                 'Successfully saved category "' + category.name + '"',
                 'Saved Category'
             );
+
+            category.beingEdited = false;
         }.bind(this));
 };
 
 /**
+ * Mark category as being edited.
+ *
  * @param {*} category
+ * @expose
  */
 hpm.categories.list.Ctrl.prototype.edit = function(category)
 {

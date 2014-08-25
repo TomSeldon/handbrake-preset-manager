@@ -18,7 +18,6 @@ exports.getDb = getDb;
  * @param {Function} next
  */
 function getDb(next) {
-    console.log('here');
     if (db) {
         next(null, db);
     } else {

@@ -25,15 +25,28 @@
 
                 td
                     .ui.buttons.mini
+                        //- Save
                         a.ui.teal.labeled.button.icon(
                             title="Save",
+                            data-ng-show="category.beingEdited",
                             data-ng-click="categories.save(category)"
                         )
                             i.save.icon
                             | Save
 
+                        //- Cancel
+                        a.ui.labeled.button.icon(
+                            title="Cancel",
+                            data-ng-show="category.beingEdited"
+                            data-ng-click="categories.cancel(category)"
+                        )
+                            i.level.down.icon
+                            | Cancel
+
+                        //- Edit
                         a.ui.labeled.button.icon(
                             title="Edit Category",
+                            data-ng-hide="category.beingEdited"
                             data-ng-click="categories.edit(category)"
                         )
                             i.edit.icon
@@ -41,6 +54,7 @@
 
                         .or
 
+                        //- Delete
                         .ui.labeled.negative.button.icon(
                             title="Delete category"
                         )

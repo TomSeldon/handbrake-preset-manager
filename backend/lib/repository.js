@@ -171,10 +171,11 @@ function setSaveMetadata(saveMetadata) {
                 var name = entityType.entityTypeName,
                     len = name.indexOf(':');
 
+                // todo: This differs from the example (which doesn't work)
                 if (len > -1) {
-                    entityType.collectionName = name.substr(0, len);
+                    entityType.defaultResourceName = name.substr(0, len);
                 } else {
-                    entityType.collectionName = name;
+                    entityType.defaultResourceName = name;
                 }
             }
         }
