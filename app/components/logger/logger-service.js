@@ -34,8 +34,12 @@ hpm.logger.toastrMock = {
 hpm.logger.Service.prototype.error = function(message, title)
 {
     this.toastr.error(message, title);
-    this.$log.error(title);
-    this.$log.error('Error: ' + message);
+
+    if (title) {
+        this.$log.error(title);
+    }
+
+    this.$log.error(message);
 };
 
 /**
@@ -45,8 +49,12 @@ hpm.logger.Service.prototype.error = function(message, title)
 hpm.logger.Service.prototype.warning = function(message, title)
 {
     this.toastr.warning(message, title);
-    this.$log.warning(title);
-    this.$log.warning('Warning: ' + message);
+
+    if (title) {
+        this.$log.warning(title);
+    }
+
+    this.$log.warning(message);
 };
 
 /**
@@ -56,8 +64,12 @@ hpm.logger.Service.prototype.warning = function(message, title)
 hpm.logger.Service.prototype.info = function(message, title)
 {
     this.toastr.info(message, title);
-    this.$log.info(title);
-    this.$log.info('Warning: ' + message);
+
+    if (title) {
+        this.$log.info(title);
+    }
+
+    this.$log.info(message);
 };
 
 /**
@@ -67,8 +79,12 @@ hpm.logger.Service.prototype.info = function(message, title)
 hpm.logger.Service.prototype.success = function(message, title)
 {
     this.toastr.success(message, title);
-    this.$log.info(title);
-    this.$log.info('Success: ' + message);
+
+    if (title) {
+        this.$log.info(title);
+    }
+
+    this.$log.info(message);
 };
 
 /**
