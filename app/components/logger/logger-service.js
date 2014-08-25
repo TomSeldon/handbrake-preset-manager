@@ -10,8 +10,21 @@ goog.provide('hpm.logger.Service');
  */
 hpm.logger.Service = function($window, $log)
 {
-    this.toastr = $window.toastr;
+    this.toastr = $window.toastr || hpm.logger.toastrMock;
     this.$log = $log;
+};
+
+/**
+ * Mock toastr object that is used if global
+ * toastr isn't available.
+ *
+ * @type {Object}
+ */
+hpm.logger.toastrMock = {
+    error: function() {},
+    warning: function() {},
+    info: function() {},
+    success: function() {}
 };
 
 /**
@@ -21,6 +34,7 @@ hpm.logger.Service = function($window, $log)
 hpm.logger.Service.prototype.error = function(message, title)
 {
     this.toastr.error(message, title);
+    this.$log.error(title);
     this.$log.error('Error: ' + message);
 };
 
@@ -31,6 +45,7 @@ hpm.logger.Service.prototype.error = function(message, title)
 hpm.logger.Service.prototype.warning = function(message, title)
 {
     this.toastr.warning(message, title);
+    this.$log.warning(title);
     this.$log.warning('Warning: ' + message);
 };
 
@@ -41,6 +56,7 @@ hpm.logger.Service.prototype.warning = function(message, title)
 hpm.logger.Service.prototype.info = function(message, title)
 {
     this.toastr.info(message, title);
+    this.$log.info(title);
     this.$log.info('Warning: ' + message);
 };
 
@@ -51,6 +67,7 @@ hpm.logger.Service.prototype.info = function(message, title)
 hpm.logger.Service.prototype.success = function(message, title)
 {
     this.toastr.success(message, title);
+    this.$log.info(title);
     this.$log.info('Success: ' + message);
 };
 

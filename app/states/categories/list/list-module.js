@@ -3,6 +3,7 @@
 goog.provide('hpm.categories.list.module');
 
 goog.require('hpm.categories.list.Ctrl');
+goog.require('hpm.categories.list.Service');
 goog.require('hpm.semanticui.popup.Directive.factory');
 
 /**
@@ -29,5 +30,6 @@ hpm.categories.list.module.configuration = function($stateProvider)
 
 hpm.categories.list.module
     .config(hpm.categories.list.module.configuration)
+    .service('CategoriesListService', hpm.categories.list.Service)
     .controller('CategoriesListCtrl', hpm.categories.list.Ctrl)
     .directive('popup', hpm.semanticui.popup.Directive.factory);

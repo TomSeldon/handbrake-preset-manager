@@ -5,6 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     chalk = require('chalk'),
     path = require('path'),
+    errorHandler = require('./lib/error-handler'),
     routes = require('./routes');
 
 var app, port, env;
@@ -33,12 +34,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 if (env === 'development') {
     var livereload = require('express-livereload');
 
-    // Logger
-    app.use(logger('dev'));
-
     // Livereload
     livereload(app, {
-        watchDir: __dirname + '/../app'
+        watchDir: __dirname + '/../build'
     });
 
     // Service source files (for source map usage)
@@ -50,6 +48,9 @@ if (env === 'development') {
 // Init routes
 routes.web.init(app);
 routes.breeze.init(app);
+
+// Error handling
+app.use(errorHandler);
 
 // Start server
 if (!module.parent) {

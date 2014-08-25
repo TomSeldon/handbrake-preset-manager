@@ -15,7 +15,7 @@ gulp.task('compile', function() {
         jar: paths.vendor +
             '/closure-compiler/lib/vendor/compiler.jar',
 
-        compilation_level: 'ADVANCED_OPTIMIZATIONS',
+        compilation_level: 'SIMPLE_OPTIMIZATIONS',
 
         language_in: 'ECMASCRIPT5_STRICT',
 
@@ -28,7 +28,9 @@ gulp.task('compile', function() {
             paths.vendor +
                 '/closure-compiler-git/contrib/externs/jquery-1.9.js',
 
-            __dirname + '/../custom-externs/semantic-ui.js'
+            __dirname + '/../custom-externs/semantic-ui.js',
+
+            __dirname + '/../custom-externs/breeze.js'
         ],
 
         create_source_map: paths.build.directory +

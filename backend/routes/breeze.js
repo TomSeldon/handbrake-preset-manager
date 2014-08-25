@@ -11,6 +11,9 @@ function configureRoutes(app) {
     var repository = require('../lib/repository');
 
     app.get('/breeze/hpm/Lookups', getLookups);
+    app.get('/breeze/hpm/Metadata', getMetadata);
+    app.get('/breeze/hpm/SaveChanges', saveChanges);
+    app.get('/breeze/hpm/:resource', getQuery);
 
     /**
      * @param {*} req
@@ -32,11 +35,9 @@ function configureRoutes(app) {
      * @param {Function} next
      */
     function getMetadata(req, res, next) {
-        next({
-            statusCode: 404,
-            message: 'No metadata available from server. ' +
-                'Metadata should be defined on the client.'
-        });
+        var metadata = require('../metadata');
+
+        makeResponseHandler(res, next)(null, metadata);
     }
 
     /**
@@ -47,8 +48,8 @@ function configureRoutes(app) {
      * @param {Function} next
      */
     function getQuery(req, res, next) {
-        var resourceName = req.params.resource,
-            query = repository['get' + resourceName.toLowerCase()];
+        var resourceName = req.params.resource.toLowerCase(),
+            query = repository.queries['get' + resourceName];
 
         if (!!query) {
             query(req.query, makeResponseHandler(res, next));
@@ -81,7 +82,7 @@ function configureRoutes(app) {
                         'max-stale=0, post-check=0, pre-check=0'
                 );
 
-                res.setHeader('Content-Type:', 'application/json');
+                res.setHeader('Content-Type', 'application/json');
                 res.send(JSON.stringify(results));
             }
         }

@@ -2,7 +2,7 @@
 
 var MongoClient = require('mongodb').MongoClient,
     db = null,
-    mongoUrl = '',
+    config = require('../../config'),
     mongoOptions = {
         server: {
             autoConnect: true
@@ -10,7 +10,7 @@ var MongoClient = require('mongodb').MongoClient,
     };
 
 /**
- * @type {getDb}
+ * @type {Function}
  */
 exports.getDb = getDb;
 
@@ -21,9 +21,13 @@ function getDb(next) {
     if (db) {
         next(null, db);
     } else {
-        MongoClient.connect(mongoUrl, mongoOptions, function(err, db_) {
-            db = db_;
-            next(null, db);
-        });
+        MongoClient.connect(
+            config.database.connectionString,
+            mongoOptions,
+            function(err, db_) {
+                db = db_;
+                next(null, db);
+            }
+        );
     }
 }

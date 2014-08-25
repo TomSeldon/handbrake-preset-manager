@@ -2,6 +2,7 @@
 
 goog.provide('hpm.presets.list.module');
 
+goog.require('hpm.breeze.module');
 goog.require('hpm.presets.list.Ctrl');
 goog.require('hpm.semanticui.popup.Directive.factory');
 
@@ -9,7 +10,9 @@ goog.require('hpm.semanticui.popup.Directive.factory');
  * @type {angular.Module}
  */
 hpm.presets.list.module = angular.module('presets.list', [
-    'ui.router'
+    'ui.router',
+
+    hpm.breeze.module.name
 ]);
 
 /**

@@ -7,9 +7,10 @@
                 th.four.wide Category
                 th.six.wide Actions
         tbody
-            tr.no-presets(data-ng-if="!presets.mediaPresets")
+            tr.no-presets(data-ng-if="!presets.mediaPresets.length")
                 td.negative(colspan="3")
                     | No presets found.
+
             tr.preset(data-ng-repeat="preset in presets.mediaPresets")
                 td
                     a(data-ui-sref="presets.detail({id: preset.id})")

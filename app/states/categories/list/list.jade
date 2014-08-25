@@ -1,19 +1,27 @@
 .ui.one.column.grid.presets
     .column
         h1.ui.header Categories
+        p(data-ng-if="categories.isLoading") test
         table.ui.three.column.table.basic
             thead
                 tr
                     th.ten.wide Name
                     th.six.wide Actions
             tbody
-                tr.no-categories(data-ng-if="!categories.categoryList")
+                //- Loading
+                tr.loading(data-ng-if="categories.isLoading")
+                    td.warning(colspan="3")
+                        | Loading categories...
+
+                //- No presets
+                tr.no-categories(data-ng-if="!categories.categoryList.length && !categories.isLoading")
                     td.negative(colspan="3")
                         | No categories found.
 
+                //- Preset list
                 tr.category(data-ng-repeat="category in categories.categoryList")
                     td
-                        a(data-ui-sref="categories.detail({id: category.id})")
+                        a(data-ui-sref="categories.detail({id: category._id})")
                             | {{ category.name }}
 
                     td
@@ -21,7 +29,7 @@
                             a.ui.labeled.button.icon(
                                 title="Edit Category",
                                 data-popup="",
-                                data-ui-sref="categories.detail({id: category.id})"
+                                data-ui-sref="categories.detail({id: category._id})"
                             )
                                 i.edit.icon
                                 | Edit

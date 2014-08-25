@@ -6,6 +6,13 @@ App for managing Handbrake presets that can be exported as commands
 for the CLI version of Handbrake which doesn't natively support
 custom presets.
 
+## Installation
+
+### Configuration
+
+* Copy `/config/index.js.dist` to `/config/index.js`.
+* Enter config settings into `/config/index.js`.
+
 ## Compiler flags
 
 `HPM_DEBUG_UI_STATE` - `false` - If set to true, outputs debugging information related to UI Router

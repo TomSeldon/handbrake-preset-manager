@@ -1,0 +1,31 @@
+'use strict';
+
+/**
+ * @fileoverview
+ * Configuration settings for Handbrake Preset Manager.
+ */
+
+module.exports = {
+
+    database: {
+
+        host: '',
+        port: null,
+        name: '',
+        username: '',
+        password: '',
+
+        /**
+         * Generate conneciton stirng in the format:
+         * mongodb://user:pass@host:port/dbname
+         *
+         * @return {string}
+         */
+        get connectionString() {
+            return 'mongodb://' + this.username + ':' + this.password + '@' +
+                this.host + ':' + this.port + '/' + this.name;
+        }
+
+    }
+
+};

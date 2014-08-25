@@ -1,9 +1,9 @@
 'use strict';
 
-goog.require('hpm.breeze.Config');
+goog.require('hpm.breeze.module');
 goog.require('hpm.categories.module');
+goog.require('hpm.config.Service');
 goog.require('hpm.debug.state.module');
-//goog.require('hpm.environment.Factory');
 goog.require('hpm.logger.module');
 goog.require('hpm.presets.module');
 goog.require('hpm.semanticui.popup.Directive.factory');
@@ -18,6 +18,7 @@ angular.module('hpm', [
 
         // Internal dependencies
         // Components
+        hpm.breeze.module.name,
         hpm.logger.module.name,
         hpm.debug.state.module.name,
 
@@ -27,7 +28,8 @@ angular.module('hpm', [
     ]
 )
 .config(config)
-//.factory('environment', hpm.environment.Factory)
+.run(run)
+.service('config', hpm.config.Service)
 .directive('popup', hpm.semanticui.popup.Directive.factory);
 
 /**
@@ -35,3 +37,8 @@ angular.module('hpm', [
  * @ngInject
  */
 function config() {}
+
+/**
+ * @ngInject
+ */
+function run() {}

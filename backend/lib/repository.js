@@ -5,9 +5,8 @@ var bmongo = require('breeze-mongodb'),
     database = require('./database');
 
 var collectionNames = [
-    'PresetGroup',
-    'Preset',
-    'Author'
+    'Category',
+    'Preset'
 ];
 
 /**
@@ -15,7 +14,8 @@ var collectionNames = [
  */
 module.exports = {
     getLookups: getLookups,
-    saveChanges: saveChanges
+    saveChanges: saveChanges,
+    queries: {}
 };
 
 addQueries();
@@ -34,7 +34,7 @@ function addQueries() {
     function makeCollectionQueryFor(collectionName) {
         var resourceName, collectionQuery;
 
-        resourceName = pluralize(collectionName);
+        resourceName = String(pluralize(collectionName)).toLowerCase();
 
         collectionQuery = function(queryString, next)
         {
@@ -45,7 +45,7 @@ function addQueries() {
             }, next);
         };
 
-        exports['get' + resourceName.toLowerCase()] = collectionQuery;
+        module.exports.queries['get' + resourceName] = collectionQuery;
     }
 }
 
