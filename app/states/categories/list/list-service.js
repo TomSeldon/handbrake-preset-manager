@@ -22,7 +22,7 @@ hpm.categories.list.Service = function(dataService)
 hpm.categories.list.Service.prototype.save = function(categoryEntity)
 {
     return this.dataService.entityManager
-        .saveChanges();
+        .saveChanges([categoryEntity]);
 };
 
 /**
