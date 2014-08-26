@@ -1,8 +1,8 @@
 table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoading}")
     thead
         tr
-            th.eleven.wide Name
-            th.five.wide Actions
+            th.eleven.wide.name Name
+            th.five.wide.ui.actions Actions
     tbody
         //- No categories
         tr.no-categories(data-ng-if="!categories.categoryList.length && !categories.isLoading")
@@ -11,7 +11,8 @@ table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoadin
 
         //- Categories list
         tr.category(
-            data-ng-repeat="category in categories.categoryList"
+            data-ng-repeat="category in categories.categoryList",
+            data-ng-class="{'warning': category.entityAspect.hasValidationErrors}"
         )
             td
                 //- Link to edit
@@ -26,18 +27,25 @@ table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoadin
                     | {{ category.name }}
 
                 //- Edit form
-                .ui.small.fluid.input(
+                .ui.small.fluid.icon.input(
                     data-ng-show="category.beingEdited && !category.isBeingSaved"
                 )
                     input(
                         data-ng-model="category.name",
                         data-ng-disabled="!categories.canEdit(category)",
-                        data-ng-keypress="categories.changeEvent($event, category)"
+                        data-ng-keypress="categories.changeEvent($event, category)",
                         placeholder="Category name"
                     )
 
+                    i.warning.icon(data-ng-show="category.entityAspect.hasValidationErrors")
+
+                //- Validation errors
+                .ui.divided.section.error.list(data-ng-show="category.entityAspect.hasValidationErrors")
+                    .item(data-ng-repeat="error in category.entityAspect.getValidationErrors()")
+                        | {{ error.errorMessage }}
+
             td
-                .ui.buttons.mini
+                .ui.buttons.mini.floated.right
                     //- Edit
                     button.ui.labeled.button.icon(
                         title="Edit Category",

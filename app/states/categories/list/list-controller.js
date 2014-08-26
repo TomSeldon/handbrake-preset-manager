@@ -106,7 +106,12 @@ hpm.categories.list.Ctrl.prototype.hasChanges = function()
  */
 hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
 {
-    category.entityAspect.rejectChanges();
+    var entAspect = category.entityAspect;
+
+    if (!entAspect.entityState.isAdded()) {
+        entAspect.rejectChanges();
+    }
+
     category.beingEdited = false;
 };
 
@@ -130,20 +135,58 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
     this.isLoading = true;
 
     this.categoriesService.saveChanges()
-        .then(function() {
-            this.logger.success(
-                'Successfully saved changes',
-                'Saved successfully'
-            );
-        }.bind(this))
-        .then(this.getCategories.bind(this))
-        .then(function() {
-            this.categoryList.forEach(function(category) {
-                 category.beingEdited = false;
-            });
+        .then(
+            this.saveSuccess.bind(this),
+            this.saveFail.bind(this)
+        )
+        .then(
+            function() {
+                this.isLoading = false;
+            }.bind(this)
+        );
+};
 
-            this.isLoading = false;
-        }.bind(this));
+/**
+ * Save success callback.
+ */
+hpm.categories.list.Ctrl.prototype.saveSuccess = function()
+{
+    this.logger.success(
+        // message
+        'Successfully saved changes',
+
+        // title
+        'Saved successfully'
+    );
+
+    this.markAllNotEditing();
+};
+
+/**
+ * Save error callback.
+ *
+ * @param {breeze.Error} error
+ */
+hpm.categories.list.Ctrl.prototype.saveFail = function(error)
+{
+    console.log(error);
+    this.logger.error(
+        // message
+        'Unable to save changes. See validation errors for details.',
+
+        // Message
+        'Save failed'
+    );
+};
+
+/**
+ * Mark all categories as not being edited.
+ */
+hpm.categories.list.Ctrl.prototype.markAllNotEditing = function()
+{
+    this.categoryList.forEach(function(category) {
+        category.beingEdited = false;
+    });
 };
 
 /**
