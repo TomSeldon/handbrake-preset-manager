@@ -16,7 +16,7 @@ hpm.config.Service = function($window)
      */
     this.toastr = {
 
-        timeout: 2000,
+        timeOut: 5000,
 
         positionClass: 'toast-bottom-right',
 
