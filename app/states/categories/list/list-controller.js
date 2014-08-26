@@ -169,7 +169,6 @@ hpm.categories.list.Ctrl.prototype.saveSuccess = function()
  */
 hpm.categories.list.Ctrl.prototype.saveFail = function(error)
 {
-    console.log(error);
     this.logger.error(
         // message
         'Unable to save changes. See validation errors for details.',
