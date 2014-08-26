@@ -5,26 +5,14 @@ goog.provide('hpm.logger.Service');
 /**
  * @param {angular.$window} $window
  * @param {angular.$log} $log
+ * @param {toastr} toastr
  * @ngInject
  * @constructor
  */
-hpm.logger.Service = function($window, $log)
+hpm.logger.Service = function($window, $log, toastr)
 {
-    this.toastr = $window.toastr || hpm.logger.toastrMock;
+    this.toastr = toastr;
     this.$log = $log;
-};
-
-/**
- * Mock toastr object that is used if global
- * toastr isn't available.
- *
- * @type {Object}
- */
-hpm.logger.toastrMock = {
-    error: function() {},
-    warning: function() {},
-    info: function() {},
-    success: function() {}
 };
 
 /**

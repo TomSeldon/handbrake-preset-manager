@@ -7,7 +7,9 @@ goog.require('hpm.logger.Service');
 /**
  * @type {angular.Module}
  */
-hpm.logger.module = angular.module('logger', []);
+hpm.logger.module = angular.module('logger', [
+    'toastr'
+]);
 
 /**
  * @ngInject

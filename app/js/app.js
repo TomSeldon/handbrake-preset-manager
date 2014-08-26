@@ -15,6 +15,7 @@ angular.module('hpm', [
         // Vendor dependencies
         'ui.router',
         'breeze.directives',
+        'toastr',
 
         // Internal dependencies
         // Components
@@ -34,11 +35,17 @@ angular.module('hpm', [
 
 /**
  * Configuration function.
+ *
  * @ngInject
+ * @param {Object} config
+ * @param {Object} toastrConfig
  */
-function config() {}
+function run(config, toastrConfig) {
+    // Set toastr config
+    angular.extend(toastrConfig, config.toastr);
+}
 
 /**
  * @ngInject
  */
-function run() {}
+function config() {}

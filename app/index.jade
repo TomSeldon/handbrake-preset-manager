@@ -5,6 +5,7 @@ html(lang=en, data-ng-app='hpm')
         title {{ $state.current.name }}
 
         //- Base styles
+        link(rel='stylesheet', href='/vendor/angular-toastr/dist/angular-toastr.min.css')
         link(rel='stylesheet', href='/vendor/breezejs/labs/breeze.directives.css')
         link(rel='stylesheet', href='/vendor/semantic-ui/build/packaged/css/semantic.min.css')
         link(rel='stylesheet', href='/assets/css/app.css')
@@ -44,6 +45,7 @@ html(lang=en, data-ng-app='hpm')
             script(src='/vendor/breezejs/labs/breeze.saveErrorExtensions.js')
             script(src='/vendor/breezejs/adapters/breeze.dataService.mongo.js')
             script(src='/vendor/semantic-ui/build/packaged/javascript/semantic.min.js')
+            script(src='vendor/angular-toastr/dist/angular-toastr.min.js')
 
             //- App script(s)
             script(src='/assets/js/app.min.js')

@@ -16,7 +16,8 @@
   "dependencies": {
     "angular": "~1.2.21",
     "breezejs": "~1.4.16",
-    "semantic-ui": "~0.19.0"
+    "semantic-ui": "~0.19.0",
+    "angular-toastr": "~0.4.0"
   },
   "devDependencies": {
     "closure-compiler": "~0.2.6",
