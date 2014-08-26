@@ -18,9 +18,29 @@ hpm.config.Service = function($window)
 
         timeOut: 5000,
 
+        extendedTimeOut: 3000,
+
         positionClass: 'toast-bottom-right',
 
-        closeButton: true
+        closeButton: true,
+
+        closeHtml: '<i class="black close icon"></i>',
+
+        toastClass: 'toast ui segment',
+
+        titleClass: 'ui tiny header',
+
+        iconClasses: {
+
+            success: 'green',
+
+            info: 'teal',
+
+            error: 'red',
+
+            warning: 'orange tertiary'
+
+        }
 
     };
 
