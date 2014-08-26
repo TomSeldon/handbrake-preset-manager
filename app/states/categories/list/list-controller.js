@@ -148,12 +148,16 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
 
 /**
  * Save success callback.
+ *
+ * @param {Object} saveResult
  */
-hpm.categories.list.Ctrl.prototype.saveSuccess = function()
+hpm.categories.list.Ctrl.prototype.saveSuccess = function(saveResult)
 {
+    var numUpdated = parseInt(saveResult.entities.length, 10);
+
     this.logger.success(
         // message
-        'Successfully saved changes',
+        numUpdated + ' entities were affected',
 
         // title
         'Saved successfully'

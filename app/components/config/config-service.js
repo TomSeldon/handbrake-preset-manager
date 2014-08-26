@@ -18,7 +18,9 @@ hpm.config.Service = function($window)
 
         timeout: 2000,
 
-        positionClass: 'toast-bottom-right'
+        positionClass: 'toast-bottom-right',
+
+        closeButton: true
 
     };
 
