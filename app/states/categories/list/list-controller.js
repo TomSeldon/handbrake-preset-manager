@@ -7,7 +7,7 @@ goog.provide('hpm.categories.list.Ctrl');
  *
  * @param {hpm.categories.list.Service} CategoriesListService
  * @param {hpm.util.logger} logger
- * @    constructor
+ * @constructor
  * @ngInject
  */
 hpm.categories.list.Ctrl = function(CategoriesListService, logger)
@@ -23,6 +23,7 @@ hpm.categories.list.Ctrl = function(CategoriesListService, logger)
     this.logger = logger;
 
     /**
+     * TODO: Bind to EntityManager directly, if possible.
      * @type {array}
      * @expose
      */
@@ -196,4 +197,16 @@ hpm.categories.list.Ctrl.prototype.remove = function(category)
     category.entityAspect.rejectChanges();
     category.entityAspect.setDeleted();
     category.beingEdited = false;
+};
+
+/**
+ * Create new Category.
+ */
+hpm.categories.list.Ctrl.prototype.createCategory = function()
+{
+    var category = this.categoriesService.createCategory();
+
+    category.beingEdited = true;
+
+    this.categoryList.push(category);
 };

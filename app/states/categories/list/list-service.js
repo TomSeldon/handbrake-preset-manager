@@ -64,3 +64,15 @@ hpm.categories.list.Service.prototype.getCategories = function()
         this.createQuery()
     );
 };
+
+/**
+ * Create a new Category entity.
+ *
+ * @return {*}
+ */
+hpm.categories.list.Service.prototype.createCategory = function()
+{
+    return this.dataService.entityManager.createEntity(
+        'Category'
+    );
+};

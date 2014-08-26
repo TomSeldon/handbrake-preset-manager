@@ -1,6 +1,17 @@
 .column
     h1.ui.header Categories
 
+    .left.floated.wide.four.column
+        .ui.buttons.tiny
+            //- New Category
+            button.ui.black.labeled.button(
+                data-ng-click="categories.createCategory()",
+                data-ng-disabled="categories.isLoading",
+                data-ng-class="{'disabled': categories.isLoading}"
+            )
+                i.add.icon
+                span New Category
+
     .right.floated.wide.four.column
         .ui.buttons.tiny
             //- Save all changes
@@ -53,7 +64,8 @@
                     .ui.input(data-ng-show="category.beingEdited")
                         input(
                             data-ng-model="category.name",
-                            data-ng-disabled="!categories.canEdit(category)"
+                            data-ng-disabled="!categories.canEdit(category)",
+                            placeholder="Category name"
                         )
 
                 td
