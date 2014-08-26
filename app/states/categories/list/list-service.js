@@ -16,23 +16,42 @@ hpm.categories.list.Service = function(dataService)
 };
 
 /**
- * @param {*} categoryEntity
- * @return {Promise}
+ * @return {Boolean}
  */
-hpm.categories.list.Service.prototype.save = function(categoryEntity)
+hpm.categories.list.Service.prototype.hasChanges = function()
 {
-    return this.dataService.entityManager
-        .saveChanges([categoryEntity]);
+    return this.dataService.entityManager.hasChanges();
 };
 
 /**
+ * Saves all changes.
+ *
+ * @return {Promise}
+ */
+hpm.categories.list.Service.prototype.saveChanges = function()
+{
+    return this.dataService.entityManager.saveChanges();
+};
+
+/**
+ * @return {Promise}
+ */
+hpm.categories.list.Service.prototype.rejectChanges = function()
+{
+    return this.dataService.entityManager.rejectChanges();
+};
+
+/**
+ * Create query for returning Categories.
+ *
  * @return {breeze.EntityQuery}
  */
 hpm.categories.list.Service.prototype.createQuery = function()
 {
     return this.dataService
         .createQuery()
-        .from('Categories');
+        .from('Categories')
+        .orderBy('name');
 };
 
 /**

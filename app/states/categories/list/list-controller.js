@@ -90,35 +90,71 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
 };
 
 /**
- * Cancel changes made to category.
- * Uses Breeze method `rejectChanges`.
- * See: http://www.breezejs.com/documentation/inside-entity
+ * @return {Boolean}
+ * @expose
+ */
+hpm.categories.list.Ctrl.prototype.hasChanges = function()
+{
+    return this.categoriesService.hasChanges();
+};
+
+/**
+ * returns whether a category is pending deletion.
+ *
+ * @param {*} category
+ * @return {boolean}
+ * @expose
+ */
+hpm.categories.list.Ctrl.prototype.isPendingDeletion = function(category)
+{
+    return category.entityAspect.entityState.isDeleted();
+};
+
+/**
+ * Cancel changes for a single category.
  *
  * @param {*} category
  * @expose
  */
-hpm.categories.list.Ctrl.prototype.cancel = function(category)
+hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
 {
-    category.entityAspect.rejectChanges();
+    this.categoriesService.rejectChanges(category);
+
     category.beingEdited = false;
 };
 
 /**
- * Save a single category.
- *
- * @param {*} category
+ * Cancel all changes.
  * @expose
  */
-hpm.categories.list.Ctrl.prototype.save = function(category)
+hpm.categories.list.Ctrl.prototype.cancelAllChanges = function()
 {
-    this.categoriesService.save(category)
+    this.categoriesService.rejectChanges();
+
+    this.categoryList.forEach(function(category) {
+        category.beingEdited = false;
+    });
+};
+
+/**
+ * Save all changes.
+ *
+ * @expose
+ */
+hpm.categories.list.Ctrl.prototype.saveChanges = function()
+{
+    this.isLoading = true;
+
+    this.categoriesService.saveChanges()
         .then(function() {
             this.logger.success(
-                'Successfully saved category "' + category.name + '"',
-                'Saved Category'
+                'Successfully saved changes',
+                'Saved successfully'
             );
-
-            category.beingEdited = false;
+        }.bind(this))
+        .then(this.getCategories.bind(this))
+        .then(function() {
+            this.isLoading = false;
         }.bind(this));
 };
 
@@ -131,4 +167,33 @@ hpm.categories.list.Ctrl.prototype.save = function(category)
 hpm.categories.list.Ctrl.prototype.edit = function(category)
 {
     category.beingEdited = true;
+};
+
+/**
+ * Check whether an entity is allowed to be edited.
+ * An example use case would be to disable editing
+ * whilst an entity is being saved.
+ *
+ * @param {*} category
+ * @return {boolean}
+ * @expose
+ */
+hpm.categories.list.Ctrl.prototype.canEdit = function(category)
+{
+    var saving = category.entityAspect.isBeingSaved,
+        pendingDeletion = this.isPendingDeletion(category);
+
+    return !saving && !pendingDeletion;
+};
+
+/**
+ * Marks a category for deletion.
+ *
+ * @param {*} category
+ */
+hpm.categories.list.Ctrl.prototype.remove = function(category)
+{
+    category.entityAspect.rejectChanges();
+    category.entityAspect.setDeleted();
+    category.beingEdited = false;
 };
