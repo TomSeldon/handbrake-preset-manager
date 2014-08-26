@@ -155,6 +155,10 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
         }.bind(this))
         .then(this.getCategories.bind(this))
         .then(function() {
+            this.categoryList.forEach(function(category) {
+                 category.beingEdited = false;
+            });
+
             this.isLoading = false;
         }.bind(this));
 };
@@ -208,5 +212,6 @@ hpm.categories.list.Ctrl.prototype.createCategory = function()
 
     category.beingEdited = true;
 
-    this.categoryList.push(category);
+    // Insert at start of list
+    this.categoryList.splice(0, 0, category);
 };
