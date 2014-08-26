@@ -1,0 +1,67 @@
+table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoading}")
+    thead
+        tr
+            th.eleven.wide Name
+            th.five.wide Actions
+    tbody
+        //- No categories
+        tr.no-categories(data-ng-if="!categories.categoryList.length && !categories.isLoading")
+            td.negative(colspan="3")
+                | No categories found.
+
+        //- Categories list
+        tr.category(
+            data-ng-repeat="category in categories.categoryList"
+        )
+            td
+                //- Link to edit
+                a.edit(
+                    data-ng-hide="category.beingEdited || !categories.canEdit(category)",
+                    data-ng-click="categories.edit(category)"
+                )
+                    | {{ category.name }}
+
+                //- Static text
+                span(data-ng-show="!categories.canEdit(category) || category.isBeingSaved")
+                    | {{ category.name }}
+
+                //- Edit form
+                .ui.small.fluid.input(
+                    data-ng-show="category.beingEdited && !category.isBeingSaved"
+                )
+                    input(
+                        data-ng-model="category.name",
+                        data-ng-disabled="!categories.canEdit(category)",
+                        data-ng-keypress="categories.changeEvent($event, category)"
+                        placeholder="Category name"
+                    )
+
+            td
+                .ui.buttons.mini
+                    //- Edit
+                    button.ui.labeled.button.icon(
+                        title="Edit Category",
+                        data-ng-hide="category.beingEdited",
+                        data-ng-click="categories.edit(category)"
+                    )
+                        i.edit.icon
+                        | Edit
+
+                    //- Cancel
+                    button.ui.labeled.button.icon(
+                        title="Cancel changes",
+                        data-ng-show="category.beingEdited"
+                        data-ng-click="categories.cancelChanges(category)"
+                    )
+                        i.edit.icon
+                        | Cancel
+
+                    .or
+
+                    //- Delete
+                    button.ui.labeled.negative.button.icon(
+                        title="Delete category",
+                        data-ng-click="categories.remove(category)",
+                    )
+                        i.remove.icon
+                        | Delete

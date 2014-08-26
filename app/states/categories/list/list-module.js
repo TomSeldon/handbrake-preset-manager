@@ -3,14 +3,14 @@
 goog.provide('hpm.categories.list.module');
 
 goog.require('hpm.categories.list.Ctrl');
-goog.require('hpm.categories.list.Service');
-goog.require('hpm.semanticui.popup.Directive.factory');
+goog.require('hpm.data.module');
 
 /**
  * @type {angular.Module}
  */
 hpm.categories.list.module = angular.module('categories.list', [
-    'ui.router'
+    'ui.router',
+    hpm.data.module.name
 ]);
 
 /**
@@ -20,16 +20,36 @@ hpm.categories.list.module = angular.module('categories.list', [
 hpm.categories.list.module.configuration = function($stateProvider)
 {
     $stateProvider.state('categories.list', {
+
         'url': '',
 
-        'templateUrl': '/states/categories/list/list.jade',
+        'views': {
 
-        'controller': 'CategoriesListCtrl as categories'
+            '': {
+
+                'templateUrl': '/states/categories/list/list.jade',
+
+                'controller': 'CategoriesListCtrl as categories'
+
+            },
+
+            'tabledata@categories.list': {
+
+                'templateUrl': '/states/categories/list/table.jade'
+
+            },
+
+            'menu@categories.list': {
+
+                'templateUrl': '/states/categories/list/toolbar.jade'
+
+            }
+
+        }
+
     });
 };
 
 hpm.categories.list.module
     .config(hpm.categories.list.module.configuration)
-    .service('CategoriesListService', hpm.categories.list.Service)
-    .controller('CategoriesListCtrl', hpm.categories.list.Ctrl)
-    .directive('popup', hpm.semanticui.popup.Directive.factory);
+    .controller('CategoriesListCtrl', hpm.categories.list.Ctrl);

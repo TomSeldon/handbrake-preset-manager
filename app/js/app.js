@@ -18,7 +18,7 @@ angular.module('hpm', [
 
         // Internal dependencies
         // Components
-        hpm.breeze.module.name,
+        hpm.data.module.name,
         hpm.logger.module.name,
         hpm.debug.state.module.name,
 

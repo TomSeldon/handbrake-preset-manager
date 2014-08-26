@@ -41,6 +41,9 @@ module.exports = {
                 {
                     'maxLength': 50,
                     'name': 'maxLength'
+                },
+                {
+                    'name': 'required'
                 }
             ]
         }

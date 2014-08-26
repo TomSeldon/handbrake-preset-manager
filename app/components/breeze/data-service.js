@@ -23,14 +23,6 @@ hpm.breeze.data.Service = function(breeze, entityManagerFactory)
 };
 
 /**
- * @return {string}
- */
-hpm.breeze.data.Service.prototype.createMongoId = function()
-{
-    return this.breeze.DataType.MongoObjectId.getNext();
-};
-
-/**
  * @return {breeze.EntityQuery}
  * @expose
  */

@@ -1,0 +1,28 @@
+.ui.secondary.menu
+    //- New category
+    button.item.ui.black.labeled.button(
+        data-ng-click="categories.createCategory()",
+        data-ng-disabled="categories.isLoading",
+        data-ng-class="{'disabled': categories.isLoading}"
+    )
+        i.add.icon
+        | New Category
+
+    .right.menu
+        //- Save all changes
+        button.ui.teal.labeled.button.item(
+            data-ng-disabled="!categories.hasChanges()",
+            data-ng-class="{'disabled': !categories.hasChanges()}",
+            data-ng-click="categories.saveChanges()"
+        )
+            i.save.icon
+            | Save changes
+
+        //- Cancel all changes
+        button.ui.black.labeled.button.item(
+            data-ng-disabled="!categories.hasChanges()",
+            data-ng-class="{'disabled': !categories.hasChanges()}",
+            data-ng-click="categories.cancelAllChanges()"
+        )
+            i.remove.sign.icon
+            | Cancel changes

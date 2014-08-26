@@ -5,17 +5,17 @@ goog.provide('hpm.categories.list.Ctrl');
 /**
  * Categories list controller.
  *
- * @param {hpm.categories.list.Service} CategoriesListService
+ * @param {hpm.data.categories.Service} CategoriesService
  * @param {hpm.util.logger} logger
  * @constructor
  * @ngInject
  */
-hpm.categories.list.Ctrl = function(CategoriesListService, logger)
+hpm.categories.list.Ctrl = function(CategoriesService, logger)
 {
     /**
      * @type {hpm.categories.list.Service}
      */
-    this.categoriesService = CategoriesListService;
+    this.categoriesService = CategoriesService;
 
     /**
      * @type {hpm.util.logger}
@@ -23,7 +23,6 @@ hpm.categories.list.Ctrl = function(CategoriesListService, logger)
     this.logger = logger;
 
     /**
-     * TODO: Bind to EntityManager directly, if possible.
      * @type {array}
      * @expose
      */
@@ -100,27 +99,14 @@ hpm.categories.list.Ctrl.prototype.hasChanges = function()
 };
 
 /**
- * returns whether a category is pending deletion.
- *
- * @param {*} category
- * @return {boolean}
- * @expose
- */
-hpm.categories.list.Ctrl.prototype.isPendingDeletion = function(category)
-{
-    return category.entityAspect.entityState.isDeleted();
-};
-
-/**
  * Cancel changes for a single category.
  *
- * @param {*} category
+ * @param {Object} category
  * @expose
  */
 hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
 {
-    this.categoriesService.rejectChanges(category);
-
+    category.entityAspect.rejectChanges();
     category.beingEdited = false;
 };
 
@@ -131,10 +117,7 @@ hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
 hpm.categories.list.Ctrl.prototype.cancelAllChanges = function()
 {
     this.categoriesService.rejectChanges();
-
-    this.categoryList.forEach(function(category) {
-        category.beingEdited = false;
-    });
+    this.getCategories();
 };
 
 /**
@@ -164,9 +147,24 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
 };
 
 /**
+ * Event fired when a category name is altered.
+ * We listen for the 'enter' key and disable
+ * editing when it's pressed.
+ *
+ * @param {angular.Event} $event
+ * @param {Object} category
+ */
+hpm.categories.list.Ctrl.prototype.changeEvent = function($event, category)
+{
+    if (event.which === 13) {
+        category.beingEdited = false;
+    }
+};
+
+/**
  * Mark category as being edited.
  *
- * @param {*} category
+ * @param {Object} category
  * @expose
  */
 hpm.categories.list.Ctrl.prototype.edit = function(category)
@@ -179,28 +177,29 @@ hpm.categories.list.Ctrl.prototype.edit = function(category)
  * An example use case would be to disable editing
  * whilst an entity is being saved.
  *
- * @param {*} category
+ * @param {Object} category
  * @return {boolean}
  * @expose
  */
 hpm.categories.list.Ctrl.prototype.canEdit = function(category)
 {
-    var saving = category.entityAspect.isBeingSaved,
-        pendingDeletion = this.isPendingDeletion(category);
+    var saving = category.entityAspect.isBeingSaved;
 
-    return !saving && !pendingDeletion;
+    return !saving;
 };
 
 /**
  * Marks a category for deletion.
  *
- * @param {*} category
+ * @param {Object} category
  */
 hpm.categories.list.Ctrl.prototype.remove = function(category)
 {
-    category.entityAspect.rejectChanges();
+    var index = this.categoryList.indexOf(category);
+
     category.entityAspect.setDeleted();
-    category.beingEdited = false;
+
+    this.categoryList.splice(index, 1);
 };
 
 /**
