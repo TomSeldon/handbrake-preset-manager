@@ -13,6 +13,7 @@ body {
     background-attachment: fixed;
     color: @text-color;
     font-family: Helvetica, Arial, sans-serif;
+    margin-top: 3em;
 }
 
 a,
@@ -27,4 +28,15 @@ a:hover {
 
 a:hover {
     color: @link-color-hover;
+}
+
+.ui.main.menu {
+    opacity: 0.95;
+}
+
+.ui.menu .header.site.name {
+    cursor: default;
+    color: lighten(@teal, 70%);
+    opacity: 0.85;
+    background: rgba(0,0,0,0.2);
 }
