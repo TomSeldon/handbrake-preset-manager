@@ -8,10 +8,20 @@ custom presets.
 
 ## Installation
 
+### Database
+
+The application is setup to work with a MongoDB instance. You'll need to create
+the required collections manually.
+
+The application expects the following collections to exist.
+
+* `Preset`
+* `Category`
+
 ### Configuration
 
-* Copy `/config/index.js.dist` to `/config/index.js`.
-* Enter config settings into `/config/index.js`.
+* Copy `./config/index.js.dist` to `./config/index.js`.
+* Enter config settings into `./config/index.js`.
 
 ## Compiler flags
 
