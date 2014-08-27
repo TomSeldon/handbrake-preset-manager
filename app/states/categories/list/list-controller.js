@@ -23,6 +23,8 @@ hpm.categories.list.Ctrl = function(CategoriesService, logger)
     this.logger = logger;
 
     /**
+     * On controller instantiation, load entities from the cache
+     *
      * @type {array}
      * @expose
      */
@@ -37,9 +39,25 @@ hpm.categories.list.Ctrl = function(CategoriesService, logger)
     this.isLoading = true;
 
     /**
-     * Update category list.
+     * Retrieve categories.
      */
-    this.getCategories();
+    this.initCategories();
+};
+
+/**
+ *
+ */
+hpm.categories.list.Ctrl.prototype.initCategories = function()
+{
+    // Are there entities in the EM cache?
+    if (this.categoriesService.entityManager.getEntities().length) {
+        // Retrieve the categories from the entity cache
+        this.categoryList = this.categoriesService.getCategoriesFromCache();
+        this.isLoading = false;
+    } else {
+        // No entities in the cache, let's request from the server
+        this.getCategories();
+    }
 };
 
 /**

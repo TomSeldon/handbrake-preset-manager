@@ -62,14 +62,38 @@ hpm.data.categories.Service.prototype.createQuery = function()
 };
 
 /**
+ * Perform a new query for retrieving category
+ * entities. If a query is not specified, a new
+ * EntityQuery is created that will return all
+ * categories.
+ *
+ * @param {breeze.EntityQuery=} query
  * @return {*}
  * @expose
  */
-hpm.data.categories.Service.prototype.getCategories = function()
+hpm.data.categories.Service.prototype.getCategories = function(query)
 {
-    return this.entityManager.executeQuery(
-        this.createQuery()
-    );
+    query = query || this.createQuery();
+
+    return this.entityManager.executeQuery(query);
+};
+
+/**
+ * Perform a query against the entities already present
+ * in the entity manager. No remote request is made.
+ *
+ * If a query is not specified, a new EntityQuery will
+ * be created that will match all categories.
+ *
+ * @param {breeze.EntityQuery=} query
+ * @return {*}
+ * @expose
+ */
+hpm.data.categories.Service.prototype.getCategoriesFromCache = function(query)
+{
+    query = query || this.createQuery();
+
+    return this.entityManager.executeQueryLocally(query);
 };
 
 /**

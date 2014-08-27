@@ -1,40 +1,8 @@
-.column
+.column.presets.list
     h1.ui.header Presets
-    table.ui.three.column.table.basic
-        thead
-            tr
-                th.six.wide Name
-                th.four.wide Category
-                th.six.wide Actions
-        tbody
-            tr.no-presets(data-ng-if="!presets.mediaPresets.length")
-                td.negative(colspan="3")
-                    | No presets found.
 
-            tr.preset(data-ng-repeat="preset in presets.mediaPresets")
-                td
-                    a(data-ui-sref="presets.detail({id: preset.id})")
-                        | {{ preset.name }}
+    div(data-ui-view="menu")
 
-                td {{ preset.category }}
+    ui.horizontal.divider
 
-                td
-                    .ui.buttons.mini
-                        .ui.secondary.labeled.icon.button(title="View command", data-popup="")
-                            i.terminal.icon
-                            | View
-
-                        .or
-
-                        a.ui.labeled.button.icon(
-                            title="Edit Preset",
-                            data-popup="",
-                            data-ui-sref="presets.detail({id: preset.id})"
-                        )
-                            i.edit.icon
-                            | Edit
-
-                        .or
-
-                        .ui.negative.button.icon(title="Delete preset", data-popup="")
-                            i.remove.icon
+    div(data-ui-view="tabledata")
