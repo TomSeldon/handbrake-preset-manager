@@ -5,4 +5,15 @@
 // which uses an ID.
 #toast-container > div {
     color: @text-color;
+    box-shadow: 0 0 5px #888;
+    opacity: 0.9;
+
+    &:hover {
+        opacity: 1;
+        box-shadow: 0 0 5px #888;
+    }
+}
+
+.toast.ui.segment {
+    background: rgba(250, 250, 250, 0.8);
 }

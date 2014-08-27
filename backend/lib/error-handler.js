@@ -39,7 +39,7 @@ function logToConsole(err, status, body) {
     }
 
     while (err) {
-        stack = err.stack || '';
+        stack = err.stack || [];
         err = err.innerError;
 
         if (err && err.message) {
