@@ -17,9 +17,25 @@ goog.provide('hpm.breeze.entitymanager.Service');
  */
 hpm.breeze.entitymanager.Service = function(breeze, config)
 {
+    /**
+     * @type {!breeze}
+     */
     this.breeze = breeze;
+
+    /**
+     * @type {!hpm.config.Service}
+     */
     this.config = config;
+
+    /**
+     * @type {?breeze.EntityManager}
+     */
     this.manager = null;
+
+    /**
+     * @type {breeze.MetadataStore}
+     */
+    this.metadataStore = new breeze.MetadataStore();
 };
 
 /**
@@ -28,7 +44,11 @@ hpm.breeze.entitymanager.Service = function(breeze, config)
 hpm.breeze.entitymanager.Service.prototype.newManager = function()
 {
     return new this.breeze.EntityManager(
-        this.config.breeze.serviceName
+        {
+            serviceName: this.config.breeze.serviceName,
+
+            metadataStore: this.metadataStore
+        }
     );
 };
 
