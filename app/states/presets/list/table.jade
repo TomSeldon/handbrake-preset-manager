@@ -1,12 +1,7 @@
 .ui.accordion(data-ui-accordion="")
-    .title
+    .title(data-ng-repeat-start="preset in [1,2,3]")
         i.dropdown.icon
         | test
-    .content
+    .content(data-ng-repeat-end="", data-ui-accordion-item="")
         p some text
 
-    .title
-        i.dropdown.icon
-        | test
-    .content
-        p some text
