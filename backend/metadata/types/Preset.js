@@ -3,11 +3,10 @@
 /**
  * @fileoverview
  *
- * Preset structural type.
+ * Preset metadata.
  */
 
-var breeze = require('breeze-serverside'),
-    mongoId = breeze.DataType.MongoObjectId;
+var breeze = require('breeze-serverside');
 
 /**
  * Entity type deifnition for category.
@@ -16,18 +15,45 @@ var breeze = require('breeze-serverside'),
  */
 module.exports = {
 
-    shortName: 'Category',
+    name: 'Preset',
 
     dataProperties: {
 
-        id: {
-            type: mongoId
+        _id: {
+            type: 'MongoObjectId',
+            isPartOfKey: true
         },
 
         name: {
             max: 50,
-            nullOk: false
+            required: true
+        },
+
+        // Output settings
+        fileFormat: {
+            required: true
+        },
+
+        largeFileSize: {
+            type: 'Boolean',
+            defaultValue: false
+        },
+
+        webOptimized: {
+            type: 'Boolean',
+            defaultValue: false
+        },
+
+        ipod5gSupport: {
+            type: 'Boolean',
+            defaultValue: false
         }
+
+    },
+
+    navigationProperties: {
+
+        category: 'Category'
 
     }
 
