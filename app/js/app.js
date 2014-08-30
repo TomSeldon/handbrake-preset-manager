@@ -6,7 +6,7 @@ goog.require('hpm.config.Service');
 goog.require('hpm.debug.state.module');
 goog.require('hpm.logger.module');
 goog.require('hpm.presets.module');
-goog.require('hpm.semanticui.popup.Directive.factory');
+goog.require('hpm.ui.module');
 
 /**
  * Main app
@@ -22,6 +22,7 @@ angular.module('hpm', [
         hpm.data.module.name,
         hpm.logger.module.name,
         hpm.debug.state.module.name,
+        hpm.ui.module.name,
 
         // States
         hpm.categories.module.name,
@@ -30,8 +31,7 @@ angular.module('hpm', [
 )
 .config(config)
 .run(run)
-.service('config', hpm.config.Service)
-.directive('popup', hpm.semanticui.popup.Directive.factory);
+.service('config', hpm.config.Service);
 
 /**
  * Configuration function.

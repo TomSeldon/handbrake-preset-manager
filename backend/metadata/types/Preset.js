@@ -29,6 +29,11 @@ module.exports = {
             required: true
         },
 
+        description: {
+            max: 150,
+            required: false
+        },
+
         // Output settings
         fileFormat: {
             required: true

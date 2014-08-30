@@ -30,6 +30,12 @@ hpm.data.presets.Service = function(breeze, entityManagerFactory)
 hpm.data.presets.Service.ENTITY_TYPE = 'Preset';
 
 /**
+ * @const
+ * @type {string}
+ */
+hpm.data.presets.Service.ENTITY_TYPE_PLURAL = 'Presets';
+
+/**
  * Create a generic query that will return all presets.
  *
  * @return {breeze.EntityQuery}
@@ -38,7 +44,7 @@ hpm.data.presets.Service.ENTITY_TYPE = 'Preset';
 hpm.data.presets.Service.prototype.createQuery = function()
 {
     return new this.breeze.EntityQuery(
-        hpm.data.presets.Service.ENTITY_TYPE
+        hpm.data.presets.Service.ENTITY_TYPE_PLURAL
     );
 };
 
