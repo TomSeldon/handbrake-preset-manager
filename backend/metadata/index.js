@@ -6,20 +6,39 @@
  * Breeze metadata.
  */
 
+var helpers = require('./helpers'),
+    store;
+
 /**
- * @type {{}}
+ * Init method.
+ *
+ * Creates metadata store and populates it with
+ * available type definitions.
  */
-module.exports = {
+exports.init = function()
+{
+    // Import type definitions
+    var typeDefinitions = require('./types');
 
-    structuralTypes: [
-        require('./Category'),
-        require('./Preset')
-    ],
+    // Ensure required Breeze data type(s) exist
+    helpers.configureBreeze();
 
-    resourceEntityMap: {
-        Categories: 'Category:#hpm.Model',
-        Presets: 'Preset:#hpm.Model'
-    }
-
+    // Create and populate metadata store
+    store = helpers.createMetadataStore();
+    helpers.fillMetadataStore(store, typeDefinitions);
 };
 
+/**
+ * Return serialized representation of metadata
+ * that can be consumed by Breeze clients.
+ *
+ * @return {*|String}
+ */
+exports.getMetadata = function()
+{
+    if (!store) {
+        exports.init();
+    }
+
+    return store.exportMetadata();
+};

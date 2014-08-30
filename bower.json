@@ -17,7 +17,8 @@
     "angular": "~1.2.21",
     "breezejs": "~1.4.16",
     "semantic-ui": "~0.19.0",
-    "angular-toastr": "~0.4.0"
+    "angular-toastr": "~0.4.0",
+    "breeze.server.node": "https://github.com/Breeze/breeze.server.node.git"
   },
   "devDependencies": {
     "closure-compiler": "~0.2.6",
