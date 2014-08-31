@@ -46,7 +46,14 @@ gulp.task('compile', function() {
             paths.build.filename,
 
         output_wrapper: '(function(){%output%})()' +
-            '//# sourceMappingURL=/assets/js/app.min.js.map'
+            '//# sourceMappingURL=/assets/js/app.min.js.map',
+
+        define: [
+
+            // State debugging
+            'hpm.debug.state.module.HPM_DEBUG_UI_STATE=false'
+
+        ]
 
     };
 

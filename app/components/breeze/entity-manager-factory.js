@@ -44,12 +44,12 @@ hpm.breeze.entitymanager.Service = function(breeze, config)
 hpm.breeze.entitymanager.Service.prototype.newManager = function()
 {
     return new this.breeze.EntityManager(
-        {
-            serviceName: this.config.breeze.serviceName,
+            {
+                serviceName: this.config.breeze.serviceName,
 
-            metadataStore: this.metadataStore
-        }
-    );
+                metadataStore: this.metadataStore
+            }
+        );
 };
 
 /**

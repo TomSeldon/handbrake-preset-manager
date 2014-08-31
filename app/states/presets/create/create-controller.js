@@ -5,10 +5,11 @@ goog.provide('hpm.presets.create.Ctrl');
 /**
  * @param {angular.Scope} $scope
  * @param {hpm.data.presets.Service} PresetsService
+ * @param {Object} preset
  * @constructor
  * @ngInject
  */
-hpm.presets.create.Ctrl = function($scope, PresetsService)
+hpm.presets.create.Ctrl = function($scope, PresetsService, preset)
 {
     /**
      * @type {angular.Scope}
@@ -31,7 +32,7 @@ hpm.presets.create.Ctrl = function($scope, PresetsService)
     /**
      * @type {Object|*}
      */
-    this.preset = PresetsService.createPreset();
+    this.preset = preset;
 
     // On controller destruction, remove the entity if it wasn't saved
     this.scope.$on('$destroy', this._destroy.bind(this));
