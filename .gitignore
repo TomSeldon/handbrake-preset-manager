@@ -1,4 +1,5 @@
 config/index.js
+build/js/*.map
 
 .idea
 node_modules
