@@ -29,7 +29,6 @@ angular.module('hpm', [
         hpm.presets.module.name
     ]
 )
-.config(config)
 .run(run)
 .service('config', hpm.config.Service);
 
@@ -44,8 +43,3 @@ function run(config, toastrConfig) {
     // Set toastr config
     angular.extend(toastrConfig, config.toastr);
 }
-
-/**
- * @ngInject
- */
-function config() {}

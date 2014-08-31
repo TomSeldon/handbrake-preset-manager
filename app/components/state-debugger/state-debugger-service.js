@@ -12,23 +12,55 @@ goog.provide('hpm.debug.state.Service');
  */
 hpm.debug.state.Service = function($rootScope, $log)
 {
+    /**
+     * @type {angular.rootScope}
+     */
     this.rootScope = $rootScope;
-    this.logger = $log;
 
-    $rootScope.$on('$stateChangeStart', this.stateChangeStart.bind(this));
-    $rootScope.$on('$stateChangeError', this.stateChangeError.bind(this));
-    $rootScope.$on('$stateChangeSuccess', this.stateChangeSuccess.bind(this));
-    $rootScope.$on('$viewContentLoaded', this.viewContentLoaded.bind(this));
-    $rootScope.$on('$stateNotFound', this.stateNotFound.bind(this));
+    /**
+     * @type {angular.$log}
+     */
+    this.logger = $log;
 };
 
 /**
- * Log on state change start.
- *
- * @param {*} event
- * @param {Object} toState
- * @param {Object} toParams
- */
+* Start debug logging.
+*/
+hpm.debug.state.Service.prototype.start = function()
+{
+    this.rootScope.$on(
+        '$stateChangeStart',
+        this.stateChangeStart.bind(this)
+    );
+
+    this.rootScope.$on(
+        '$stateChangeError',
+        this.stateChangeError.bind(this)
+    );
+
+    this.rootScope.$on(
+        '$stateChangeSuccess',
+        this.stateChangeSuccess.bind(this)
+    );
+
+    this.rootScope.$on(
+        '$viewContentLoaded',
+        this.viewContentLoaded.bind(this)
+    );
+
+    this.rootScope.$on(
+        '$stateNotFound',
+        this.stateNotFound.bind(this)
+    );
+};
+
+/**
+* Log on state change start.
+*
+* @param {*} event
+* @param {Object} toState
+* @param {Object} toParams
+*/
 hpm.debug.state.Service.prototype.stateChangeStart = function(
     event,
     toState,
@@ -44,8 +76,8 @@ hpm.debug.state.Service.prototype.stateChangeStart = function(
 };
 
 /**
- * Log on state change error.
- */
+* Log on state change error.
+*/
 hpm.debug.state.Service.prototype.stateChangeError = function()
 {
     this.logger.error(
@@ -56,11 +88,11 @@ hpm.debug.state.Service.prototype.stateChangeError = function()
 };
 
 /**
- * Log on state change success.
- *
- * @param {*} event
- * @param {string} toState
- */
+* Log on state change success.
+*
+* @param {*} event
+* @param {string} toState
+*/
 hpm.debug.state.Service.prototype.stateChangeSuccess = function(event, toState)
 {
     this.logger.info(
@@ -70,23 +102,23 @@ hpm.debug.state.Service.prototype.stateChangeSuccess = function(event, toState)
 };
 
 /**
- * Log on view content loaded.
- *
- * @param {*} event
- */
+* Log on view content loaded.
+*
+* @param {*} event
+*/
 hpm.debug.state.Service.prototype.viewContentLoaded = function(event)
 {
     this.logger.log('$viewContentLoaded - fired after dom rendered', event);
 };
 
 /**
- * Log on state not found.
- *
- * @param {*} event
- * @param {Object} unfoundState
- * @param {string} fromState
- * @param {*} fromParams
- */
+* Log on state not found.
+*
+* @param {*} event
+* @param {Object} unfoundState
+* @param {string} fromState
+* @param {*} fromParams
+*/
 hpm.debug.state.Service.prototype.stateNotFound = function(
     event,
     unfoundState,

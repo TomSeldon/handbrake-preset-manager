@@ -22,6 +22,23 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
 ]);
 
 /**
+ * Returns a new preset object. This requires
+ * metadata to be fetched first, which is an async
+ * operation and hence this is used as a resolver
+ * function which is run before controller instantiation.
+ *
+ * @ngInject
+ * @param {hpm.data.presets.Service} PresetsService
+ */
+hpm.presets.create.module.presetResolveFn = function(PresetsService)
+{
+    PresetsService.entityManager.fetchMetadata()
+        .then(function() {
+            return PresetsService.createPreset();
+        });
+};
+
+/**
  * @ngInject
  * @param {ui.router.$stateProvider} $stateProvider
  * @param {ui.router.$urlRouterProvider} $urlRouterProvider
@@ -52,6 +69,12 @@ hpm.presets.create.module.configuration = function(
                 'templateUrl': '/states/presets/create/menu.jade'
 
             }
+
+        },
+
+        'resolve': {
+
+            preset: hpm.presets.create.module.presetResolveFn
 
         }
 
