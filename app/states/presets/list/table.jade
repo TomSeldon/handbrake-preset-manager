@@ -1,7 +1,8 @@
 .ui.accordion(data-ui-accordion="")
-    .title(data-ng-repeat-start="preset in [1,2,3]")
+    .title(data-ng-repeat-start="preset in presets.presetsList")
         i.dropdown.icon
-        | test
+        | {{ preset.name }}
+
     .content(data-ng-repeat-end="", data-ui-accordion-item="")
-        p some text
+        p {{ preset.description }}
 

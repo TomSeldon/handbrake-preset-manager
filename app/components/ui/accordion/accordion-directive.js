@@ -39,8 +39,18 @@ hpm.ui.accordion.Directive.prototype.link = function(scope, element) {
  * @param {angular.Element} element
  */
 hpm.ui.accordion.Directive.prototype.initAccordion = function(element) {
+    var el = angular.element(element);
+
     // Initialise Semantic UI accordion
-    angular.element(element).accordion();
+    if (!el.hasClass('ui')) {
+        el.addClass('ui');
+    }
+
+    if (!el.hasClass('accordion')) {
+        el.addClass('accordion');
+    }
+
+    el.accordion();
 };
 
 /**
@@ -55,7 +65,9 @@ hpm.ui.accordion.Directive.factory = function()
 
     return {
 
-        link: directive.link
+        link: directive.link,
+
+        scope: true
 
     };
 };

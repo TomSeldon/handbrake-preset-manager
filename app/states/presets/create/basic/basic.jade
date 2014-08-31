@@ -1,0 +1,34 @@
+.ui.column
+    h2 Basic details
+
+    .ui.form
+        .field
+            label Name
+                .ui.left.labeled.icon.input
+                    input(
+                        type="text",
+                        placeholder="Preset name",
+                        data-ng-model="presetCreate.preset.name"
+                    )
+
+                    i.pencil.icon
+
+                    .ui.corner.label
+                        i.icon.asterisk
+
+        .field
+            label Category
+                .ui.left.labeled
+                    select(
+                        data-ng-model="presetCreate.preset.category",
+                        data-ng-options="category.name for category in presetCreate.categories"
+                    )
+
+        .field
+            .ui.basic.fluid.accordion(data-ui-accordion="")
+                .title
+                    i.dropdown.icon
+                    | Description
+
+                .content
+                    textarea(data-ng-model="presetCreate.preset.description")

@@ -2,6 +2,7 @@
 
 goog.provide('hpm.presets.module');
 
+goog.require('hpm.presets.create.module');
 goog.require('hpm.presets.detail.module');
 goog.require('hpm.presets.list.module');
 
@@ -12,6 +13,7 @@ goog.require('hpm.presets.list.module');
  */
 hpm.presets.module = angular.module('presets', [
     'ui.router',
+    hpm.presets.create.module.name,
     hpm.presets.detail.module.name,
     hpm.presets.list.module.name
 ]);
