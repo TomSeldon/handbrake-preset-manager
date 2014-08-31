@@ -31,7 +31,7 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
  * @param {hpm.data.presets.Service} PresetsService
  * @return {Promise}
  */
-hpm.presets.create.module.presetResolveFn = function(PresetsService)
+hpm.presets.create.module.newPresetResolveFn = function(PresetsService)
 {
     if (PresetsService.hasFetchedMetadata()) {
         return PresetsService.createPreset();
@@ -95,7 +95,7 @@ hpm.presets.create.module.configuration = function(
 
         'resolve': {
 
-            preset: hpm.presets.create.module.presetResolveFn,
+            preset: hpm.presets.create.module.newPresetResolveFn,
 
             categories: hpm.presets.create.module.categoriesResolveFn
 

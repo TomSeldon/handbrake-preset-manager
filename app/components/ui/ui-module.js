@@ -10,6 +10,7 @@
 goog.provide('hpm.ui.module');
 
 goog.require('hpm.ui.accordion.module');
+goog.require('hpm.ui.checkbox.module');
 goog.require('hpm.ui.popup.module');
 
 /**
@@ -17,5 +18,6 @@ goog.require('hpm.ui.popup.module');
  */
 hpm.ui.module = angular.module('hpm.ui', [
     hpm.ui.accordion.module.name,
+    hpm.ui.checkbox.module.name,
     hpm.ui.popup.module.name
 ]);

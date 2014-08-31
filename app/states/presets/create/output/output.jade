@@ -14,3 +14,35 @@
 
                     .ui.corner.label
                         i.asterisk.icon
+
+        .three.fields
+            .field
+                .ui.slider.checkbox
+                    input(
+                        type="checkbox",
+                        id="preset_largeFileSize",
+                        data-ng-model="presetCreate.preset.largeFileSize"
+                    )
+                    label(for="preset_largeFileSize")
+                        | Large file size
+
+            .field
+                .ui.slider.checkbox
+                    input(
+                        type="checkbox",
+                        id="preset_webOptimized",
+                        data-ng-model="presetCreate.preset.webOptimized"
+                    )
+                    label(for="preset_webOptimized")
+                        | Web optimized
+
+
+            .field
+                .ui.slider.checkbox
+                    input(
+                        type="checkbox",
+                        id="preset_ipod5gSupport",
+                        data-ng-model="presetCreate.preset.ipod5gSupport"
+                    )
+                    label(for="preset_ipod5gSupport")
+                        | iPod 5G Support

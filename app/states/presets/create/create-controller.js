@@ -27,12 +27,12 @@ hpm.presets.create.Ctrl = function($scope, PresetsService, preset, categories)
      */
     this.categories = categories;
 
-    console.log(categories);
-
     /**
      * @type {Object|*}
      */
     this.preset = preset;
+
+    window.preset = preset;
 
     // On controller destruction, remove the entity if it wasn't saved
     this.scope.$on('$destroy', this._destroy.bind(this));
