@@ -31,6 +31,7 @@ table.ui.three.column.table.basic(data-ng-class="{'loading': categories.isLoadin
                     data-ng-show="category.beingEdited && !category.isBeingSaved"
                 )
                     input(
+                        type="text",
                         data-ng-model="category.name",
                         data-ng-disabled="!categories.canEdit(category)",
                         data-ng-keypress="categories.changeEvent($event, category)",

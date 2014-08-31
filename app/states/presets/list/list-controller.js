@@ -15,7 +15,7 @@ hpm.presets.list.Ctrl = function(PresetsService, logger)
     /**
      * @type {hpm.data.presets.Service}
      */
-    this.presetService = PresetsService;
+    this.presetsService = PresetsService;
 
     /**
      * @type {hpm.logger.Service}
@@ -39,4 +39,72 @@ hpm.presets.list.Ctrl = function(PresetsService, logger)
      * @type {boolean}
      */
     this.isLoading = true;
+
+    /**
+     * Fetch Presets.
+     */
+    this.initPresets();
+};
+
+/**
+ * Get list of all presets.
+ */
+hpm.presets.list.Ctrl.prototype.initPresets = function()
+{
+    // Are there entities in the EM cache?
+    if (this.presetsService.entityManager.getEntities().length) {
+        // Retrieve presets from entity cache
+        this.presetsList = this.presetsService.getPresetsFromCache();
+        this.isLoading = false;
+    } else {
+        // No entities in the cache, request them from the server
+        this.getPresets();
+    }
+};
+
+/**
+ * Get list of all presets.
+ */
+hpm.presets.list.Ctrl.prototype.getPresets = function()
+{
+    this.isLoading = true;
+
+    /**
+     * Called on successful retrieval of presets.
+     *
+     * @param {*} data
+     * @this {hpm.presets.list.Ctrl}
+     */
+    function onSuccess(data) {
+        this.presetsList = data.results;
+    }
+
+    /**
+     * Called if error occurred whilst fetching presets.
+     *
+     * @param {*} error
+     * @this {hpm.presets.list.Ctrl}
+     */
+    function onError(error) {
+        this.logger.error(error, 'Unable to get presets');
+    }
+
+    /**
+     * Called after operation completed, whether successfully
+     * or not.
+     *
+     * @this {hpm.presets.list.Ctrl}
+     */
+    function onComplete() {
+        this.isLoading = false;
+    }
+
+    this.presetsService.getPresets()
+        .then(
+            onSuccess.bind(this),
+            onError.bind(this)
+        )
+        .then(
+            onComplete.bind(this)
+        );
 };

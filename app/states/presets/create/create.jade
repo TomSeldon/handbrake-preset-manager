@@ -1,0 +1,20 @@
+.column.presets.list
+    h1.ui.header
+        | Create new preset
+
+    h3.ui.disabled.header
+        | {{ presetCreate.preset.name }}
+
+    div(data-ui-view="menu")
+
+    div(data-ui-view="")
+
+    .ui.secondary.menu
+        //- Save preset
+        button.item.ui.black.labeled.button(
+            data-ng-disabled="presetCreate.isBeingSaved",
+            data-ng-class="{'disabled': presetCreate.isBeingSaved}"
+            data-ng-click="presetCreate.save()"
+        )
+            i.add.icon
+            | Save Preset

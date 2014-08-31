@@ -30,6 +30,12 @@ hpm.data.presets.Service = function(breeze, entityManagerFactory)
 hpm.data.presets.Service.ENTITY_TYPE = 'Preset';
 
 /**
+ * @const
+ * @type {string}
+ */
+hpm.data.presets.Service.ENTITY_TYPE_PLURAL = 'Presets';
+
+/**
  * Create a generic query that will return all presets.
  *
  * @return {breeze.EntityQuery}
@@ -38,7 +44,7 @@ hpm.data.presets.Service.ENTITY_TYPE = 'Preset';
 hpm.data.presets.Service.prototype.createQuery = function()
 {
     return new this.breeze.EntityQuery(
-        hpm.data.presets.Service.ENTITY_TYPE
+        hpm.data.presets.Service.ENTITY_TYPE_PLURAL
     );
 };
 
@@ -54,6 +60,42 @@ hpm.data.presets.Service.prototype.createQuery = function()
 hpm.data.presets.Service.prototype.getPresets = function(query)
 {
     query = query || this.createQuery();
+
+    return this.entityManager.executeQuery(query);
+};
+
+/**
+ * Perform a query against the entities already present
+ * in the entity manager. No remote request is made.
+ *
+ * If a query is not specified, a new EntityQuery will
+ * be created that will match all categories.
+ *
+ * @param {breeze.EntityQuery=} query
+ * @return {*}
+ * @expose
+ */
+hpm.data.presets.Service.prototype.getPresetsFromCache = function(query)
+{
+    query = query || this.createQuery();
+
+    return this.entityManager.executeQueryLocally(query);
+};
+
+/**
+ * Helper method for returning available categories.
+ *
+ * We don't use the CategoriesService for this as we use
+ * separate entity managers.
+ *
+ * @return {Promise}
+ * @expose
+ */
+hpm.data.presets.Service.prototype.getAvailableCategories = function()
+{
+    var query = new this.breeze.EntityQuery()
+        .from('Categories')
+        .orderBy('name');
 
     return this.entityManager.executeQuery(query);
 };

@@ -35,7 +35,7 @@ function configureRoutes(app) {
      * @param {Function} next
      */
     function getMetadata(req, res, next) {
-        var metadata = require('../metadata');
+        var metadata = require('../metadata').getMetadata();
 
         makeResponseHandler(res, next)(null, metadata);
     }
