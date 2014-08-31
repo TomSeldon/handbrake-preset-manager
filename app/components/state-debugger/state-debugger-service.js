@@ -5,6 +5,8 @@ goog.provide('hpm.debug.state.Service');
 /**
  * Debugging service for Angular UI Router states.
  *
+ * TODO: Add flags for different logging levels.
+ *
  * @param {angular.rootScope} $rootScope
  * @param {angular.$log} $log
  * @constructor

@@ -29,6 +29,15 @@ module.exports = {
             required: true
         }
 
+    },
+
+    navigationProperties: {
+
+        presets: {
+            type: 'Preset',
+            hasMany: true
+        }
+
     }
 
 };

@@ -112,3 +112,16 @@ hpm.data.presets.Service.prototype.createPreset = function()
         hpm.data.presets.Service.ENTITY_TYPE
     );
 };
+
+/**
+ * Check whether metadata has been retured for the data service.
+ *
+ * @return {Boolean}
+ */
+hpm.data.presets.Service.prototype.hasFetchedMetadata = function()
+{
+    var serviceName = this.entityManager.serviceName,
+        metadataStore = this.entityManager.metadataStore;
+
+    return metadataStore.hasMetadataFor(serviceName);
+};

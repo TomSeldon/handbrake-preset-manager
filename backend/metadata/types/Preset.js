@@ -58,7 +58,9 @@ module.exports = {
 
     navigationProperties: {
 
-        category: 'Category'
+        category: {
+            type: 'Category'
+        }
 
     }
 

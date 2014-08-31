@@ -6,10 +6,11 @@ goog.provide('hpm.presets.create.Ctrl');
  * @param {angular.Scope} $scope
  * @param {hpm.data.presets.Service} PresetsService
  * @param {Object} preset
+ * @param {Array} categories
  * @constructor
  * @ngInject
  */
-hpm.presets.create.Ctrl = function($scope, PresetsService, preset)
+hpm.presets.create.Ctrl = function($scope, PresetsService, preset, categories)
 {
     /**
      * @type {angular.Scope}
@@ -24,10 +25,9 @@ hpm.presets.create.Ctrl = function($scope, PresetsService, preset)
     /**
      * @type {Array}
      */
-    this.categories = [
-        { name: 'test' },
-        { name: 'another category' }
-    ];
+    this.categories = categories;
+
+    console.log(categories);
 
     /**
      * @type {Object|*}

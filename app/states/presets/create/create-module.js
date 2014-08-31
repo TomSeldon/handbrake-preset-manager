@@ -29,12 +29,33 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
  *
  * @ngInject
  * @param {hpm.data.presets.Service} PresetsService
+ * @return {Promise}
  */
 hpm.presets.create.module.presetResolveFn = function(PresetsService)
 {
-    PresetsService.entityManager.fetchMetadata()
-        .then(function() {
-            return PresetsService.createPreset();
+    if (PresetsService.hasFetchedMetadata()) {
+        return PresetsService.createPreset();
+    } else {
+        return PresetsService.entityManager.fetchMetadata()
+            .then(function() {
+                return PresetsService.createPreset();
+            });
+    }
+};
+
+/**
+ * Returns array of available categories.
+ * Query result is resolved before controller instantiation.
+ *
+ * @ngInject
+ * @param {hpm.data.presets.Service} PresetsService
+ * @return {Promise|*}
+ */
+hpm.presets.create.module.categoriesResolveFn = function(PresetsService)
+{
+    return PresetsService.getAvailableCategories()
+        .then(function(data) {
+            return data.results;
         });
 };
 
@@ -74,7 +95,9 @@ hpm.presets.create.module.configuration = function(
 
         'resolve': {
 
-            preset: hpm.presets.create.module.presetResolveFn
+            preset: hpm.presets.create.module.presetResolveFn,
+
+            categories: hpm.presets.create.module.categoriesResolveFn
 
         }
 

@@ -25,5 +25,5 @@ The application expects the following collections to exist.
 
 ## Compiler flags
 
-`HPM_DEBUG_UI_STATE` - `false` - If set to true, outputs debugging information related to UI Router
-states to the console.
+`hpm.debug.state.module.HPM_DEBUG_UI_STATE` - `false` - If set to true, outputs
+debugging information related to UI Routes states to the console.
