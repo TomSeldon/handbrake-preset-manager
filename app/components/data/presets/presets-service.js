@@ -43,9 +43,8 @@ hpm.data.presets.Service.ENTITY_TYPE_PLURAL = 'Presets';
  */
 hpm.data.presets.Service.prototype.createQuery = function()
 {
-    return new this.breeze.EntityQuery(
-        hpm.data.presets.Service.ENTITY_TYPE_PLURAL
-    );
+    return new this.breeze.EntityQuery()
+        .from(hpm.data.presets.Service.ENTITY_TYPE_PLURAL);
 };
 
 /**

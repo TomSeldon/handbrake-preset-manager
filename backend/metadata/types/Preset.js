@@ -29,6 +29,11 @@ module.exports = {
             required: true
         },
 
+        categoryId: {
+            type: 'MongoObjectId',
+            required: true
+        },
+
         description: {
             max: 150,
             required: false
@@ -59,7 +64,9 @@ module.exports = {
     navigationProperties: {
 
         category: {
-            type: 'Category'
+            type: 'Category',
+            foreignKeyNames: ['categoryId'],
+            associationName: 'Preset_Category'
         }
 
     }

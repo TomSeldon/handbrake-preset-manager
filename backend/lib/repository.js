@@ -87,13 +87,11 @@ function getLookups(next) {
     function get(db) {
         var failed = false,
             lookups = {},
-            queryCountdown = 0;
+            queryCountdown = collectionNames.length;
 
         collectionNames.forEach(getAll);
 
         function getAll(collectionName) {
-            queryCountdown += 1;
-
             db.collection(collectionName, {strict: true}, collectionCallback);
 
             function collectionCallback(err, collection) {
@@ -127,7 +125,7 @@ function getLookups(next) {
                         lookups[collectionName] = results;
 
                         if (queryCountdown === 0) {
-                            next(null, results);
+                            next(null, lookups);
                         }
                     }
                 }

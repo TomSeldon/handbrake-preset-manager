@@ -1,8 +1,7 @@
 'use strict';
 
-goog.require('hpm.breeze.module');
 goog.require('hpm.categories.module');
-goog.require('hpm.config.Service');
+goog.require('hpm.config.module');
 goog.require('hpm.debug.state.module');
 goog.require('hpm.logger.module');
 goog.require('hpm.presets.module');
@@ -19,6 +18,7 @@ angular.module('hpm', [
 
         // Internal dependencies
         // Components
+        hpm.config.module.name,
         hpm.data.module.name,
         hpm.logger.module.name,
         hpm.debug.state.module.name,
@@ -29,8 +29,7 @@ angular.module('hpm', [
         hpm.presets.module.name
     ]
 )
-.run(run)
-.service('config', hpm.config.Service);
+.run(run);
 
 /**
  * Configuration function.

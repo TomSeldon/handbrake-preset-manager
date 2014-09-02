@@ -35,6 +35,7 @@ module.exports = {
 
         presets: {
             type: 'Preset',
+            associationName: 'Category_Presets',
             hasMany: true
         }
 
