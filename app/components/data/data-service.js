@@ -49,6 +49,7 @@ hpm.data.Service = function(breeze, entityManagerFactory)
         getCategories: this.getCategories,
         createPreset: this.createPreset,
         createCategory: this.createCategory,
+        cancelAllChanges: this.cancelAllChanges,
         saveChanges: this.saveChanges,
         hasChanges: this.hasChanges,
         hasFetchedMetadata: this.hasFetchedMetadata
@@ -203,6 +204,16 @@ hpm.data.Service.prototype.createCategory = function()
 hpm.data.Service.prototype.saveChanges = function()
 {
     return this.entityManager.saveChanges();
+};
+
+/**
+ * Cancel any changes present in the entity manager.
+ *
+ * @return {*}
+ */
+hpm.data.Service.prototype.cancelAllChanges = function()
+{
+    return this.entityManager.cancelChanges();
 };
 
 /**

@@ -24,7 +24,8 @@ describe('Data service', function() {
             createEntity: jasmine.createSpy(),
             saveChanges: jasmine.createSpy(),
             hasChanges: jasmine.createSpy(),
-            executeQuery: jasmine.createSpy()
+            executeQuery: jasmine.createSpy(),
+            cancelChanges: jasmine.createSpy()
         };
 
         mockEmFactory = {
@@ -139,6 +140,20 @@ describe('Data service', function() {
                 service.hasChanges();
 
                 expect(mockEm.hasChanges).toHaveBeenCalled();
+            });
+        });
+
+        describe('cancelling changes', function() {
+            it('should expose a method for cancelling changes ' +
+                'stored in the entity manager', function() {
+                expect(typeof service.cancelAllChanges).toBe('function');
+            });
+
+            it('should delegate to the entity manager to ' +
+                'cancel the changes', function() {
+                service.cancelAllChanges();
+
+                expect(mockEm.cancelChanges).toHaveBeenCalled();
             });
         });
     });
