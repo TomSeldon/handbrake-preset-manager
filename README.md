@@ -1,4 +1,4 @@
-# Handbrake Preset Manager (WIP)
+# Handbrake Preset Manager (WIP) [![Build Status](https://travis-ci.org/TomSeldon/handbrake-preset-manager.svg)](https://travis-ci.org/TomSeldon/handbrake-preset-manager)
 
 **Note: This is a work in progress and is not currently functional.**
 
