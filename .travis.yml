@@ -4,6 +4,9 @@ node_js:
     - "0.10"
     - "0.11"
 
+before_install:
+    - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
 install:
     - npm install
     - bower install
@@ -11,3 +14,6 @@ install:
 cache:
     - node_modules
     - bower_components
+
+matrix:
+    fast_finish: true
