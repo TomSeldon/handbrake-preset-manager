@@ -5,17 +5,17 @@ goog.provide('hpm.presets.list.Ctrl');
 /**
  * Presets list controller.
  *
- * @param {hpm.data.presets.Service} PresetsService
+ * @param {hpm.data.Service} DataContext
  * @param {hpm.logger.Service} logger
  * @constructor
  * @ngInject
  */
-hpm.presets.list.Ctrl = function(PresetsService, logger)
+hpm.presets.list.Ctrl = function(DataContext, logger)
 {
     /**
-     * @type {hpm.data.presets.Service}
+     * @type {hpm.data.Service}
      */
-    this.presetsService = PresetsService;
+    this.dataContext = DataContext;
 
     /**
      * @type {hpm.logger.Service}
@@ -52,9 +52,9 @@ hpm.presets.list.Ctrl = function(PresetsService, logger)
 hpm.presets.list.Ctrl.prototype.initPresets = function()
 {
     // Are there entities in the EM cache?
-    if (this.presetsService.entityManager.getEntities().length) {
+    if (this.dataContext.entityManager.getEntities().length) {
         // Retrieve presets from entity cache
-        this.presetsList = this.presetsService.getPresetsFromCache();
+        this.presetsList = this.dataContext.getPresetsFromCache();
         this.isLoading = false;
     } else {
         // No entities in the cache, request them from the server
@@ -99,7 +99,7 @@ hpm.presets.list.Ctrl.prototype.getPresets = function()
         this.isLoading = false;
     }
 
-    this.presetsService.getPresets()
+    this.dataContext.getPresets()
         .then(
             onSuccess.bind(this),
             onError.bind(this)

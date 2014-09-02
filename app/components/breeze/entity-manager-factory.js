@@ -36,12 +36,21 @@ hpm.breeze.entitymanager.Service = function(breeze, config)
      * @type {breeze.MetadataStore}
      */
     this.metadataStore = new breeze.MetadataStore();
+
+    /**
+     * Expose API for creating and retrieving entity manager(s).
+     */
+    return {
+        createManager: this.createManager,
+
+        getSharedManager: this.getManager
+    };
 };
 
 /**
  * @return {breeze.EntityManager}
  */
-hpm.breeze.entitymanager.Service.prototype.newManager = function()
+hpm.breeze.entitymanager.Service.prototype.createManager = function()
 {
     return new this.breeze.EntityManager(
             {

@@ -29,7 +29,7 @@ angular.module('hpm', [
         hpm.presets.module.name
     ]
 )
-.run(run);
+.run(toastrConfig);
 
 /**
  * Configuration function.
@@ -38,7 +38,7 @@ angular.module('hpm', [
  * @param {Object} config
  * @param {Object} toastrConfig
  */
-function run(config, toastrConfig) {
+function toastrConfig(config, toastrConfig) {
     // Set toastr config
     angular.extend(toastrConfig, config.toastr);
 }

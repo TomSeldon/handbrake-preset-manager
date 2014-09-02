@@ -1,29 +1,50 @@
 'use strict';
 
-var path = require('path');
-
 var karmaConfig;
 
 karmaConfig = {
-    basePath: path.resolve(__dirname + '/../../'),
+    basePath: __dirname + '/../../',
 
-    frameworks: ['jasmine'],
+    frameworks: [
+        'jasmine',
+        'closure'
+    ],
 
     files: [
+        // Vendor
+        'bower_components/es5-shim/es5-shim.js',
         'bower_components/angular/angular.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
 
+        // Closure
         'bower_components/closure-library/closure/goog/base.js',
-        'bower_components/closure-library/closure/goog/deps.js',
 
-        'app/components/**/*.js',
+        {
+            pattern: 'app/**/*.spec.js'
+        },
 
-        'app/states/**/*-controller.js',
-        'app/states/*/*/*.js',
-        'app/states/**/*.js',
+        {
+            pattern: 'app/components/**/*.js',
+            included: false
+        },
 
-        'app/js/app.js'
+        {
+            pattern: 'app/states/**/*.js',
+            included: false
+        },
+
+        {
+            pattern: 'app/js/**/*.js',
+            included: false
+        },
+
+        {
+            pattern: 'bower_components/closure-library/closure/goog/deps.js',
+            included: false,
+            served: false
+        }
+
     ],
 
     exclude: [
@@ -31,7 +52,9 @@ karmaConfig = {
         'app/states/**/*.scenario.js'
     ],
 
-    browsers: ['PhantomJS'],
+    browsers: [
+        'PhantomJS'
+    ],
 
     autoWatch: false,
 
@@ -43,15 +66,31 @@ karmaConfig = {
     ],
 
     preprocessors: {
-        'app/js/app.js': 'coverage',
-        'app/states/**/!(*.spec|*.scenario|*.spec).js': 'coverage',
-        'app/components/**/!(*.spec).js': 'coverage'
+        'app/**/*.spec.js': [
+            'closure',
+            'closure-iit'
+        ],
+
+        'app/states/**/!(*.pageobject|*.scenario|*.spec).js': [
+            'closure',
+            'coverage'
+        ],
+
+        'app/components/**/!(*.spec).js': [
+            'closure',
+            'coverage'
+        ],
+
+        '../bower_components/closurelibrary/closure/goog/deps.js': [
+            'closure-deps'
+        ]
     },
 
     coverageReporter: {
         type: 'html',
         dir: 'test/unit/coverage'
     }
+
 };
 
 /**

@@ -1,20 +1,23 @@
 'use strict';
 
+goog.require('hpm.categories.list.module');
+
 describe('CategoriesListCtrl', function() {
     var ctrl;
 
-    beforeEach(module('presets.list'));
+    beforeEach(module(hpm.categories.list.module.name));
 
     beforeEach(inject(function($injector) {
-        var $rootScope = $injector.get('$rootScope'),
-            $controller = $injector.get('$controller');
+        var $controller = $injector.get('$controller'),
+            DataContext,
+            logger;
 
-        ctrl = $controller('PresetsListCtrl', {
-            $scope: $rootScope.$new()
+        DataContext = {};
+        logger = {};
+
+        ctrl = $controller('CategoriesListCtrl', {
+            DataContext: DataContext,
+            logger: logger
         });
     }));
-
-    it('should do some stuff', function() {
-        expect(ctrl.a).toEqual('');
-    });
 });

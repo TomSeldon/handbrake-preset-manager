@@ -8,6 +8,15 @@ custom presets.
 
 ## Installation
 
+### Clone repo and install dependencies:
+
+```shell
+$ git clone git@github.com:TomSeldon/handbrake-preset-manager.git
+$ cd handbrake-preset-manager
+$ npm install
+$ bower install
+```
+
 ### Database
 
 The application is setup to work with a MongoDB instance. You'll need to create
@@ -22,6 +31,14 @@ The application expects the following collections to exist.
 
 * Copy `./config/index.js.dist` to `./config/index.js`.
 * Enter config settings into `./config/index.js`.
+
+### Run
+
+```shell
+$ npm start
+```
+
+Visit: http://localhost:3000
 
 ## Compiler flags
 

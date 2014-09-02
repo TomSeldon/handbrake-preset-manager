@@ -5,17 +5,17 @@ goog.provide('hpm.categories.list.Ctrl');
 /**
  * Categories list controller.
  *
- * @param {hpm.data.categories.Service} CategoriesService
+ * @param {hpm.data.Service} DataContext
  * @param {hpm.util.logger} logger
  * @constructor
  * @ngInject
  */
-hpm.categories.list.Ctrl = function(CategoriesService, logger)
+hpm.categories.list.Ctrl = function(DataContext, logger)
 {
     /**
-     * @type {hpm.categories.list.Service}
+     * @type {hpm.data.Service}
      */
-    this.categoriesService = CategoriesService;
+    this.dataContext = DataContext;
 
     /**
      * @type {hpm.util.logger}
@@ -50,9 +50,9 @@ hpm.categories.list.Ctrl = function(CategoriesService, logger)
 hpm.categories.list.Ctrl.prototype.initCategories = function()
 {
     // Are there entities in the EM cache?
-    if (this.categoriesService.entityManager.getEntities().length) {
+    if (this.dataContext.entityManager.getEntities().length) {
         // Retrieve the categories from the entity cache
-        this.categoryList = this.categoriesService.getCategoriesFromCache();
+        this.categoryList = this.dataContext.getCategoriesFromCache();
         this.isLoading = false;
     } else {
         // No entities in the cache, let's request from the server
@@ -97,7 +97,7 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
         this.isLoading = false;
     }
 
-    this.categoriesService.getCategories()
+    this.dataContext.getCategories()
         .then(
             onSuccess.bind(this),
             onError.bind(this)
@@ -113,7 +113,7 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
  */
 hpm.categories.list.Ctrl.prototype.hasChanges = function()
 {
-    return this.categoriesService.hasChanges();
+    return this.dataContext.hasChanges();
 };
 
 /**
@@ -139,7 +139,7 @@ hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
  */
 hpm.categories.list.Ctrl.prototype.cancelAllChanges = function()
 {
-    this.categoriesService.rejectChanges();
+    this.dataContext.rejectChanges();
     this.getCategories();
 };
 
@@ -152,7 +152,7 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
 {
     this.isLoading = true;
 
-    this.categoriesService.saveChanges()
+    this.dataContext.saveChanges()
         .then(
             this.saveSuccess.bind(this),
             this.saveFail.bind(this)
@@ -271,7 +271,7 @@ hpm.categories.list.Ctrl.prototype.remove = function(category)
  */
 hpm.categories.list.Ctrl.prototype.createCategory = function()
 {
-    var category = this.categoriesService.createCategory();
+    var category = this.dataContext.createCategory();
 
     category.beingEdited = true;
 
