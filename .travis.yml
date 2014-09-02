@@ -1,0 +1,13 @@
+language: node_js
+
+node_js:
+    - "0.10"
+    - "0.11"
+
+install:
+    - npm install
+    - bower install
+
+cache:
+    - node_modules
+    - bower_components
