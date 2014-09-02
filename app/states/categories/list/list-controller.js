@@ -118,7 +118,7 @@ hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
  */
 hpm.categories.list.Ctrl.prototype.cancelAllChanges = function()
 {
-    this.dataContext.rejectChanges();
+    this.dataContext.cancelAllChanges();
     this.getCategories();
 };
 

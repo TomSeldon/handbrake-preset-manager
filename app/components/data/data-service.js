@@ -213,7 +213,7 @@ hpm.data.Service.prototype.saveChanges = function()
  */
 hpm.data.Service.prototype.cancelAllChanges = function()
 {
-    return this.entityManager.cancelChanges();
+    return this.entityManager.rejectChanges();
 };
 
 /**

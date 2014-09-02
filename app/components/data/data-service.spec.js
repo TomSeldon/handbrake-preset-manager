@@ -25,7 +25,7 @@ describe('Data service', function() {
             saveChanges: jasmine.createSpy(),
             hasChanges: jasmine.createSpy(),
             executeQuery: jasmine.createSpy(),
-            cancelChanges: jasmine.createSpy()
+            rejectChanges: jasmine.createSpy()
         };
 
         mockEmFactory = {
@@ -153,7 +153,7 @@ describe('Data service', function() {
                 'cancel the changes', function() {
                 service.cancelAllChanges();
 
-                expect(mockEm.cancelChanges).toHaveBeenCalled();
+                expect(mockEm.rejectChanges).toHaveBeenCalled();
             });
         });
     });
