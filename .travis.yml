@@ -5,7 +5,7 @@ node_js:
     - "0.11"
 
 before_install:
-    - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+    - git config --global url."https://".insteadOf git://
 
 install:
     - npm install
