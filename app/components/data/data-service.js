@@ -49,6 +49,8 @@ hpm.data.Service = function(breeze, entityManagerFactory)
         getCategories: this.getCategories,
         createPreset: this.createPreset,
         createCategory: this.createCategory,
+        saveChanges: this.saveChanges,
+        hasChanges: this.hasChanges,
         hasFetchedMetadata: this.hasFetchedMetadata
     };
 
@@ -81,17 +83,26 @@ hpm.data.Service.prototype.exposeApi = function()
 
 /**
  * @throws {Error}
+ * @return {Promise}
  */
 hpm.data.Service.prototype.initialize = function()
 {
+    var lookupsQuery;
+
     if (this.initialized === true) {
         throw new Error(
             'Data context initialization attempted multiple times.'
         );
     }
 
-    // stuff
-    this.initialized = true;
+    // Get lookups
+    lookupsQuery = this.createQuery().from('Lookups');
+
+    return this.entityManager.executeQuery(lookupsQuery)
+        .then(function(data) {
+            this.lookups = data.results;
+            this.initialized = true;
+        }.bind(this));
 };
 
 /**
@@ -182,6 +193,26 @@ hpm.data.Service.prototype.createPreset = function()
 hpm.data.Service.prototype.createCategory = function()
 {
     return this.entityManager.createEntity('Category');
+};
+
+/**
+ * Save changes in the entity manager.
+ *
+ * @return {*|Promise}
+ */
+hpm.data.Service.prototype.saveChanges = function()
+{
+    return this.entityManager.saveChanges();
+};
+
+/**
+ * Checks entity manager for changes.
+ *
+ * @return {Boolean}
+ */
+hpm.data.Service.prototype.hasChanges = function()
+{
+    return this.entityManager.hasChanges();
 };
 
 /**

@@ -28,7 +28,7 @@ hpm.presets.list.Ctrl = function(DataContext, logger)
      * @expose
      * @type {Array}
      */
-    this.presetsList = [];
+    this.presetsList = this.getPresets();
 
     /**
      * Flag set when loading presets, or performing
@@ -39,27 +39,14 @@ hpm.presets.list.Ctrl = function(DataContext, logger)
      * @type {boolean}
      */
     this.isLoading = true;
-
-    /**
-     * Fetch Presets.
-     */
-    this.initPresets();
 };
 
 /**
- * Get list of all presets.
+ * Save changes in the entity manager.
  */
-hpm.presets.list.Ctrl.prototype.initPresets = function()
+hpm.presets.list.Ctrl.prototype.saveChanges = function()
 {
-    // Are there entities in the EM cache?
-    if (this.dataContext.entityManager.getEntities().length) {
-        // Retrieve presets from entity cache
-        this.presetsList = this.dataContext.getPresetsFromCache();
-        this.isLoading = false;
-    } else {
-        // No entities in the cache, request them from the server
-        this.getPresets();
-    }
+    this.dataContext.saveChanges();
 };
 
 /**

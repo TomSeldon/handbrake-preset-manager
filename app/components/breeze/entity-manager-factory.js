@@ -40,11 +40,33 @@ hpm.breeze.entitymanager.Service = function(breeze, config)
     /**
      * Expose API for creating and retrieving entity manager(s).
      */
-    return {
+    this.api = {
         createManager: this.createManager,
-
         getSharedManager: this.getManager
     };
+
+    /**
+     * Expose the above declared API, after binding each method
+     * to the correct context.
+     */
+    return this.exposeApi();
+};
+
+/**
+ * Exposes the service's API after binding the methods
+ * to the correct context.
+ *
+ * @return {{createManager: *, getSharedManager: (Function|getManager)}|*}
+ */
+hpm.breeze.entitymanager.Service.prototype.exposeApi = function()
+{
+    for (var methodName in this.api) {
+        if (this.api.hasOwnProperty(methodName)) {
+            this.api[methodName] = this.api[methodName].bind(this);
+        }
+    }
+
+    return this.api;
 };
 
 /**
@@ -67,7 +89,7 @@ hpm.breeze.entitymanager.Service.prototype.createManager = function()
 hpm.breeze.entitymanager.Service.prototype.getManager = function()
 {
     if (!this.manager) {
-        this.manager = this.newManager();
+        this.manager = this.createManager();
     }
 
     return this.manager;

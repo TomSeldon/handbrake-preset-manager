@@ -2,6 +2,8 @@
 
 goog.provide('hpm.config.module');
 
+goog.require('hpm.config.Service');
+
 /**
  * @type {angular.Module}
  */

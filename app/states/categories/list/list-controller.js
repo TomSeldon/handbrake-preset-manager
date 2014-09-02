@@ -28,7 +28,7 @@ hpm.categories.list.Ctrl = function(DataContext, logger)
      * @type {array}
      * @expose
      */
-    this.categoryList = [];
+    this.categoryList = this.getCategories();
 
     /**
      * Flag set when loading categories.
@@ -37,27 +37,6 @@ hpm.categories.list.Ctrl = function(DataContext, logger)
      * @expose
      */
     this.isLoading = true;
-
-    /**
-     * Retrieve categories.
-     */
-    this.initCategories();
-};
-
-/**
- *
- */
-hpm.categories.list.Ctrl.prototype.initCategories = function()
-{
-    // Are there entities in the EM cache?
-    if (this.dataContext.entityManager.getEntities().length) {
-        // Retrieve the categories from the entity cache
-        this.categoryList = this.dataContext.getCategoriesFromCache();
-        this.isLoading = false;
-    } else {
-        // No entities in the cache, let's request from the server
-        this.getCategories();
-    }
 };
 
 /**

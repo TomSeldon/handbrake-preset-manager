@@ -4,7 +4,7 @@ goog.require('hpm.data.module');
 
 describe('Data service', function() {
 
-    var service, mockBreeze, mockEmFactory, mockEm, mockQuery;
+    var $q, $rootScope, service, mockBreeze, mockEmFactory, mockEm, mockQuery;
 
     beforeEach(function() {
         angular.module('hpm.breeze', []);
@@ -12,14 +12,19 @@ describe('Data service', function() {
     });
 
     beforeEach(module(function($provide) {
-        mockQuery = {};
+        mockQuery = {
+            from: jasmine.createSpy()
+        };
 
         mockBreeze = {
             EntityQuery: jasmine.createSpy().and.returnValue(mockQuery)
         };
 
         mockEm = {
-            createEntity: jasmine.createSpy()
+            createEntity: jasmine.createSpy(),
+            saveChanges: jasmine.createSpy(),
+            hasChanges: jasmine.createSpy(),
+            executeQuery: jasmine.createSpy()
         };
 
         mockEmFactory = {
@@ -31,6 +36,8 @@ describe('Data service', function() {
     }));
 
     beforeEach(inject(function($injector) {
+        $rootScope = $injector.get('$rootScope');
+        $q = $injector.get('$q');
         service = $injector.get('DataContext');
     }));
 
@@ -42,6 +49,14 @@ describe('Data service', function() {
     });
 
     describe('Initialization', function() {
+        var deferred;
+
+        beforeEach(function() {
+            deferred = $q.defer();
+
+            mockEm.executeQuery.and.returnValue(deferred.promise);
+        });
+
         it('should expose an initialization method', function() {
             expect(service.initialize).toBeDefined();
             expect(typeof service.initialize).toBe('function');
@@ -52,6 +67,8 @@ describe('Data service', function() {
 
             initFn = function() {
                 service.initialize();
+                deferred.resolve({results: []});
+                $rootScope.$digest();
             };
 
             expect(initFn).not.toThrow();
@@ -95,6 +112,33 @@ describe('Data service', function() {
                 service.createCategory();
 
                 expect(mockEm.createEntity).toHaveBeenCalledWith('Category');
+            });
+        });
+
+        describe('saving changes', function() {
+            it('should expose a method for saving changes in the ' +
+                'entity manager', function() {
+                expect(typeof service.saveChanges).toBe('function');
+            });
+
+            it('should delegate to the entity manager when saving', function() {
+                service.saveChanges();
+
+                expect(mockEm.saveChanges).toHaveBeenCalled();
+            });
+        });
+
+        describe('checking for changes', function() {
+            it('should expose a method for determining if there ' +
+                'are any changes in the cache', function() {
+                expect(typeof service.hasChanges).toBe('function');
+            });
+
+            it('should delegate to the entity manager to ' +
+                'determine if there are changes', function() {
+                service.hasChanges();
+
+                expect(mockEm.hasChanges).toHaveBeenCalled();
             });
         });
     });
