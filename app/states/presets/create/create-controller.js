@@ -4,13 +4,12 @@ goog.provide('hpm.presets.create.Ctrl');
 
 /**
  * @param {angular.Scope} $scope
- * @param {hpm.data.presets.Service} PresetsService
- * @param {Object} preset
+ * @param {hpm.data.Service} DataContext
  * @param {Array} categories
  * @constructor
  * @ngInject
  */
-hpm.presets.create.Ctrl = function($scope, PresetsService, preset, categories)
+hpm.presets.create.Ctrl = function($scope, DataContext, categories)
 {
     /**
      * @type {angular.Scope}
@@ -20,7 +19,7 @@ hpm.presets.create.Ctrl = function($scope, PresetsService, preset, categories)
     /**
      * @type {hpm.data.presets.Service}
      */
-    this.presetsService = PresetsService;
+    this.dataContext = DataContext;
 
     /**
      * @type {Array}
@@ -30,9 +29,7 @@ hpm.presets.create.Ctrl = function($scope, PresetsService, preset, categories)
     /**
      * @type {Object|*}
      */
-    this.preset = preset;
-
-    window.preset = preset;
+    this.preset = this.dataContext.createPreset();
 
     // On controller destruction, remove the entity if it wasn't saved
     this.scope.$on('$destroy', this._destroy.bind(this));
@@ -61,9 +58,9 @@ hpm.presets.create.Ctrl.prototype._destroy = function()
  */
 hpm.presets.create.Ctrl.prototype.save = function()
 {
-    this.presetsService.entityManager.saveChanges()
+    this.dataContext.saveChanges()
         .then(
-            function() {},
+            null,
 
             function(err) {
                 console.error(err);
@@ -78,4 +75,5 @@ hpm.presets.create.Ctrl.prototype.save = function()
  */
 hpm.presets.create.Ctrl.prototype.hasChanges = function()
 {
+    return this.dataContext.hasChanges();
 };

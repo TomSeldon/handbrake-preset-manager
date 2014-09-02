@@ -22,41 +22,16 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
 ]);
 
 /**
- * Returns a new preset object. This requires
- * metadata to be fetched first, which is an async
- * operation and hence this is used as a resolver
- * function which is run before controller instantiation.
- *
- * @ngInject
- * @param {hpm.data.presets.Service} PresetsService
- * @return {Promise}
- */
-hpm.presets.create.module.newPresetResolveFn = function(PresetsService)
-{
-    if (PresetsService.hasFetchedMetadata()) {
-        return PresetsService.createPreset();
-    } else {
-        return PresetsService.entityManager.fetchMetadata()
-            .then(function() {
-                return PresetsService.createPreset();
-            });
-    }
-};
-
-/**
  * Returns array of available categories.
  * Query result is resolved before controller instantiation.
  *
  * @ngInject
- * @param {hpm.data.presets.Service} PresetsService
+ * @param {hpm.data.Service} DataContext
  * @return {Promise|*}
  */
-hpm.presets.create.module.categoriesResolveFn = function(PresetsService)
+hpm.presets.create.module.categoriesResolveFn = function(DataContext)
 {
-    return PresetsService.getAvailableCategories()
-        .then(function(data) {
-            return data.results;
-        });
+    return DataContext.getLookups().Category;
 };
 
 /**
@@ -94,8 +69,6 @@ hpm.presets.create.module.configuration = function(
         },
 
         'resolve': {
-
-            preset: hpm.presets.create.module.newPresetResolveFn,
 
             categories: hpm.presets.create.module.categoriesResolveFn
 

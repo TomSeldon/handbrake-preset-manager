@@ -101,7 +101,7 @@ hpm.data.Service.prototype.initialize = function()
 
     return this.entityManager.executeQuery(lookupsQuery)
         .then(function(data) {
-            this.lookups = data.results;
+            this.lookups = data.results[0];
             this.initialized = true;
         }.bind(this));
 };

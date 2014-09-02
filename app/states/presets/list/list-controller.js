@@ -5,6 +5,10 @@ goog.provide('hpm.presets.list.Ctrl');
 /**
  * Presets list controller.
  *
+ * TODO: Move `getPresets` functionality out of controller.
+ *       Perhaps better resolved before controller instantiation
+ *       and loaded from a lookup.
+ *
  * @param {hpm.data.Service} DataContext
  * @param {hpm.logger.Service} logger
  * @constructor
@@ -39,14 +43,6 @@ hpm.presets.list.Ctrl = function(DataContext, logger)
      * @type {boolean}
      */
     this.isLoading = true;
-};
-
-/**
- * Save changes in the entity manager.
- */
-hpm.presets.list.Ctrl.prototype.saveChanges = function()
-{
-    this.dataContext.saveChanges();
 };
 
 /**
