@@ -13,7 +13,13 @@ module.exports = {
 
     Category: require('./Category/Category'),
 
-    Output: require('./Preset/Output'),
+    Cropping: require('./Preset/Cropping'),
+
+    PictureSettings: require('./Preset/PictureSettings'),
+
+    OutputSettings: require('./Preset/OutputSettings'),
+
+    VideoSettings: require('./Preset/VideoSettings'),
 
     Preset: require('./Preset/Preset')
 

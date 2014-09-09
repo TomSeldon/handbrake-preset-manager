@@ -7,13 +7,13 @@
  */
 
 /**
- * Entity type definition for category.
+ * Complex type definition for category.
  *
  * @type {Object}
  */
 module.exports = {
 
-    name: 'Output',
+    name: 'OutputSettings',
 
     isComplexType: true,
 

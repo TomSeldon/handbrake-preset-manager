@@ -37,9 +37,16 @@ module.exports = {
             required: false
         },
 
-        // Output settings
         output: {
-            complexTypeName: 'Output'
+            complexTypeName: 'OutputSettings'
+        },
+
+        video: {
+            complexTypeName: 'VideoSettings'
+        },
+
+        picture: {
+            complexTypeName: 'PictureSettings'
         }
 
     },
