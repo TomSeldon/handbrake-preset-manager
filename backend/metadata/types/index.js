@@ -11,8 +11,10 @@
  */
 module.exports = {
 
-    Category: require('./Category'),
+    Category: require('./Category/Category'),
 
-    Preset: require('./Preset')
+    Output: require('./Preset/Output'),
+
+    Preset: require('./Preset/Preset')
 
 };

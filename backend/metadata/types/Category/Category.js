@@ -6,10 +6,8 @@
  * Category metadata.
  */
 
-var breeze = require('breeze-serverside');
-
 /**
- * Entity type deifnition for category.
+ * Entity type definition for category.
  *
  * @type {Object}
  */

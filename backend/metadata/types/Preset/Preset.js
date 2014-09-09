@@ -6,10 +6,8 @@
  * Preset metadata.
  */
 
-var breeze = require('breeze-serverside');
-
 /**
- * Entity type deifnition for category.
+ * Entity type definition for preset.
  *
  * @type {Object}
  */
@@ -40,23 +38,8 @@ module.exports = {
         },
 
         // Output settings
-        fileFormat: {
-            required: true
-        },
-
-        largeFileSize: {
-            type: 'Boolean',
-            defaultValue: false
-        },
-
-        webOptimized: {
-            type: 'Boolean',
-            defaultValue: false
-        },
-
-        ipod5gSupport: {
-            type: 'Boolean',
-            defaultValue: false
+        output: {
+            complexTypeName: 'Output'
         }
 
     },

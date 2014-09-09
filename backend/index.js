@@ -6,13 +6,11 @@ var express = require('express'),
     chalk = require('chalk'),
     path = require('path'),
     errorHandler = require('./lib/error-handler'),
-    routes = require('./routes');
-
-var app, port, env;
-
-app = express();
-port = process.env.PORT || 3000;
-env = process.env.NODE_ENV || 'development';
+    routes = require('./routes'),
+    metadata = require('./metadata'),
+    app = express(),
+    port = process.env.PORT || 3000,
+    env = process.env.NODE_ENV || 'development';
 
 // Configure app
 app.set('port', port);
@@ -45,6 +43,9 @@ if (env === 'development') {
         path.resolve(process.cwd())
     ));
 }
+
+// Init metadata
+metadata.getMetadata();
 
 // Init routes
 routes.web.init(app);
