@@ -1,29 +1,36 @@
 'use strict';
 
-var config;
+/**
+ * @fileoverview Config for Protractor.
+ */
 
-config = {
-    specs: [
-        'scenarios.js',
-        '../../app/states/**/*.scenario.js'
-    ],
+/**
+ * @type {Object}
+ */
+var config = {
 
-    capabilities: {
-        'browserName': 'phantomjs'
-    },
+    /*
+     * Path to Selenium JAR file.
+     *
+     * Protractor will handle starting and stopping the server
+     * before and after the tests, respectively.
+     */
+    seleniumServerJar: '../../node_modules/selenium-standalone-wrapper/' +
+        'selenium-server-standalone-2.35.0.jar',
 
-    baseUrl: 'http://localhost:8008',
+    chromeDriver: '../../node_modules/chromedriver/bin/chromedriver',
 
-    framework: 'jasmine',
+    // The testing framework to use
+    framework: 'cucumber'
 
-    onPrepare: function() {
-        require('jasmine-spec-reporter');
-
-        jasmine.getEnv().addReporter(new jasmine.SpecReporter());
-    }
 };
 
 /**
- * @type {*}
+ * Important:
+ * Protractor expects the config file
+ * to export a `config` property, or it
+ * will go a bit nuts.
+ *
+ * @type {Object}
  */
 exports.config = config;
