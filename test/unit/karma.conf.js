@@ -16,9 +16,20 @@ karmaConfig = {
         'bower_components/angular/angular.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/breezejs/breeze.debug.js',
+        'bower_components/breezejs/adapters/breeze.dataService.mongo.js',
+        'bower_components/breezejs/labs/breeze.angular.js',
 
         // Closure
         'bower_components/closure-library/closure/goog/base.js',
+
+        // Mocks / setup
+        'test/unit/setup.js',
+
+        {
+            pattern: 'test/unit/fixtures/**/*.js',
+            included: false
+        },
 
         {
             pattern: 'app/**/*.spec.js'
@@ -56,8 +67,6 @@ karmaConfig = {
         'PhantomJS'
     ],
 
-    autoWatch: false,
-
     singleRun: true,
 
     reporters: [
@@ -67,6 +76,11 @@ karmaConfig = {
 
     preprocessors: {
         'app/**/*.spec.js': [
+            'closure',
+            'closure-iit'
+        ],
+
+        'test/unit/**/*.js': [
             'closure',
             'closure-iit'
         ],

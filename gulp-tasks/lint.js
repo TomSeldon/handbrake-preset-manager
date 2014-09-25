@@ -13,7 +13,9 @@ gulp.task('lint', function() {
             '!' + paths.build.directory + paths.build.filename,
             '!node_modules/**',
             '!' + paths.vendor + '/**',
-            '!**/prettify.js'
+            '!**/prettify.js',
+            '!jsdoc/**',
+            '!test/unit/fixtures/**'
         ])
         .pipe(gjslint())
         .pipe(gjslint.reporter('console'));

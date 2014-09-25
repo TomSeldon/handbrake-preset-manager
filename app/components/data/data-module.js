@@ -3,7 +3,8 @@
 goog.provide('hpm.data.module');
 
 goog.require('hpm.breeze.module');
-goog.require('hpm.data.Service');
+goog.require('hpm.category.module');
+goog.require('hpm.preset.module');
 
 /**
  * Module containing data services.
@@ -11,8 +12,7 @@ goog.require('hpm.data.Service');
  * @type {angular.Module}
  */
 hpm.data.module = angular.module('hpm.data', [
-    hpm.breeze.module.name
+    hpm.breeze.module.name,
+    hpm.category.module.name,
+    hpm.preset.module.name
 ]);
-
-// Register data service
-hpm.data.module.service('DataContext', hpm.data.Service);

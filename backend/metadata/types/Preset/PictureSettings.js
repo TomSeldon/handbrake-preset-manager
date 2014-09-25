@@ -21,11 +21,11 @@ module.exports = {
 
         size: {
             complexTypeName: 'SizeSettings'
-        },
-
-        filters: {
-            complexTypeName: 'FilterSettings'
         }
+//
+//        filters: {
+//            complexTypeName: 'FilterSettings'
+//        }
 
     }
 
