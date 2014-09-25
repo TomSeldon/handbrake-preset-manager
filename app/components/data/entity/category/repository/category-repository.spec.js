@@ -3,12 +3,13 @@
 goog.require('hpm.category.module');
 
 describe('CategoryRepository', function() {
-    var repository;
+    var repository, dataFacade;
 
     beforeEach(module(hpm.category.module.name));
 
     beforeEach(inject(function($injector) {
         repository = $injector.get('CategoryRepository');
+        dataFacade = $injector.get('DataFacade');
     }));
 
     it('should be able to create a new category', function() {
@@ -16,7 +17,17 @@ describe('CategoryRepository', function() {
             .toEqual('Category');
     });
 
-    it('should be able to return all categories');
+    it('should be able to return all categories', function() {
+        var manager = dataFacade.manager_;
+
+        spyOn(manager, 'executeQuery');
+
+        repository.getAllCategories();
+
+        expect(manager.executeQuery).toHaveBeenCalledWith(
+            jasmine.objectContaining({resourceName: 'Categories'})
+        );
+    });
 
     it('should be able to search for categories');
 

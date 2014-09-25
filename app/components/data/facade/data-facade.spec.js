@@ -39,7 +39,15 @@ describe('DataFacade', function() {
             .toBe(true);
     });
 
-    it('should be able to execute queries');
+    it('should be able to execute queries', function() {
+        var manager = dataFacade.manager_;
+
+        spyOn(manager, 'executeQuery');
+
+        dataFacade.executeQuery({foo: 'bar'});
+
+        expect(manager.executeQuery).toHaveBeenCalledWith({foo: 'bar'});
+    });
 
     it('should expose whether the entity manager has changes', function() {
         expect(dataFacade.hasChanges).toEqual(jasmine.any(Function));
@@ -50,7 +58,24 @@ describe('DataFacade', function() {
         expect(dataFacade.hasChanges()).toBe(true);
     });
 
-    it('should be able to save changes');
+    it('should be able to save changes', function() {
+        var manager = dataFacade.manager_;
 
-    it('should be able to cancel un-saved changes');
+        spyOn(manager, 'saveChanges');
+        expect(dataFacade.saveChanges).toEqual(jasmine.any(Function));
+
+        dataFacade.saveChanges();
+
+        expect(manager.saveChanges).toHaveBeenCalled();
+    });
+
+    it('should be able to cancel un-saved changes', function() {
+        expect(dataFacade.rejectChanges).toEqual(jasmine.any(Function));
+        expect(dataFacade.hasChanges()).toBe(false);
+
+        dataFacade.createEntity('Category');
+        dataFacade.rejectChanges();
+
+        expect(dataFacade.hasChanges()).toBe(false);
+    });
 });

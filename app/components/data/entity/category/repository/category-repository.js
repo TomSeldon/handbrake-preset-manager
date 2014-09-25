@@ -53,9 +53,8 @@ CategoryRepository.prototype.createCategory = function()
  */
 CategoryRepository.prototype.getAllCategories = function()
 {
-    var query = this.data_.createQuery(
-        CategoryRepository.ENTITY_NAME_PLURAL
-    );
+    var query = this.data_.createQuery()
+        .from(CategoryRepository.ENTITY_NAME_PLURAL);
 
     return this.data_.executeQuery(query);
 };
