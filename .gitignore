@@ -1,6 +1,7 @@
 config/index.js
 build/js/*.map
 test/unit/coverage/**
+jsdoc
 
 .idea
 node_modules
