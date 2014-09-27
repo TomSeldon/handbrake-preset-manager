@@ -26,12 +26,12 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
  * Query result is resolved before controller instantiation.
  *
  * @ngInject
- * @param {hpm.data.Service} DataContext
+ * @param {hpm.category.Repository} CategoryRepository
  * @return {Promise|*}
  */
-hpm.presets.create.module.categoriesResolveFn = function(DataContext)
+hpm.presets.create.module.categoriesResolveFn = function(CategoryRepository)
 {
-    return DataContext.getLookups().Category;
+    return CategoryRepository.getCategories();
 };
 
 /**

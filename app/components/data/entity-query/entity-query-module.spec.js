@@ -13,9 +13,7 @@ describe('EntityQueryFactory', function() {
         breeze = $injector.get('breeze');
     }));
 
-    it('should be able to create new query instances', function() {
-        expect(eqFactory.createQuery).toEqual(jasmine.any(Function));
-        expect(eqFactory.createQuery() instanceof breeze.EntityQuery)
-            .toBe(true);
+    it('should be able to return a query constructor', function() {
+        expect(eqFactory.createQuery()).toEqual(breeze.EntityQuery);
     });
 });

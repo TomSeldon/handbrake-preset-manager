@@ -12,7 +12,12 @@ var config = {
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
 
     // The testing framework to use
-    framework: 'cucumber'
+    framework: 'cucumber',
+
+    cucumberOpts: {
+        format: 'pretty',
+        require: '../../features/step_definitions/**/*.js'
+    }
 
 };
 

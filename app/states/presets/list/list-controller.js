@@ -9,17 +9,23 @@ goog.provide('hpm.presets.list.Ctrl');
  *       Perhaps better resolved before controller instantiation
  *       and loaded from a lookup.
  *
- * @param {hpm.data.Service} DataContext
+ * @param {hpm.preset.Repository} PresetRepository
  * @param {hpm.logger.Service} logger
  * @constructor
  * @ngInject
  */
-hpm.presets.list.Ctrl = function(DataContext, logger)
+hpm.presets.list.Ctrl = function(PresetRepository, logger)
 {
     /**
-     * @type {hpm.data.Service}
+     * @type {hpm.preset.Repository}
+     * @private
      */
-    this.dataContext = DataContext;
+    this.presetRepository_ = PresetRepository;
+
+    /**
+     * @type {hpm.DataFacade.Service}
+     */
+    this.dataContext = this.presetRepository_.getDataContext();
 
     /**
      * @type {hpm.logger.Service}
@@ -82,7 +88,7 @@ hpm.presets.list.Ctrl.prototype.getPresets = function()
         this.isLoading = false;
     }
 
-    this.dataContext.getPresets()
+    this.presetRepository_.getAllPresets()
         .then(
             onSuccess.bind(this),
             onError.bind(this)

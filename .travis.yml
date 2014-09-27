@@ -13,16 +13,6 @@ sudo: false
 services:
     - mongodb
 
-before_install:
-    - export NODE_ENV=test
-    - mongo hpm-test --eval 'db.addUser("hpm-test", "test");'
-    - git config --global url."https://".insteadOf git://
-
-install:
-    - npm install
-    - bower install
-    - cp config/prod.js.dist config/prod.js
-
 cache:
     directories:
         - /home/travis/.npm
@@ -35,3 +25,19 @@ matrix:
 
     allow_failures:
         - node_js: "0.11"
+
+before_install:
+    - export NODE_ENV=test
+    - mongo hpm-test --eval 'db.addUser("hpm-test", "test");'
+
+install:
+    - npm install
+    - bower install
+    - gulp compile
+    - cp config/prod.js.dist config/prod.js
+
+script:
+    - gulp lint:ci
+    - gulp karma
+    - npm start > /dev/null 2>&1 &
+    - gulp protractor

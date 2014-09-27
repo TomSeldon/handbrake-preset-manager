@@ -23,10 +23,10 @@ gulp.task('compile', function() {
 
         externs: [
             paths.vendor +
-                '/closure-compiler-git/contrib/externs/angular-1.2.js',
+                '/closure-compiler-externs/contrib/externs/angular-1.2.js',
 
             paths.vendor +
-                '/closure-compiler-git/contrib/externs/jquery-1.9.js',
+                '/closure-compiler-externs/contrib/externs/jquery-1.9.js',
 
             __dirname + '/../custom-externs/semantic-ui.js',
 

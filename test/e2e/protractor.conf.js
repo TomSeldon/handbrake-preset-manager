@@ -21,7 +21,12 @@ var config = {
     chromeDriver: '../../node_modules/chromedriver/bin/chromedriver',
 
     // The testing framework to use
-    framework: 'cucumber'
+    framework: 'cucumber',
+
+    cucumberOpts: {
+        format: 'pretty',
+        require: '../../features/step_definitions/**/*.js'
+    }
 
 };
 

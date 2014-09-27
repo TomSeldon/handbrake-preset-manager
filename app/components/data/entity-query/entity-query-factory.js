@@ -3,24 +3,25 @@
 goog.provide('hpm.EntityQueryFactory');
 
 /**
+ * @ngInject
  * @param {breeze} breeze
  * @constructor
  */
 var EntityQueryFactory = function(breeze)
 {
     /**
-     * @type {EntityQuery}
+     * @type {breeze}
      * @private
      */
-    this.EntityQuery_ = breeze.EntityQuery;
+    this.breeze_ = breeze;
 };
 
 /**
- * @return {EntityQuery}
+ * @return {breeze.EntityQuery}
  */
 EntityQueryFactory.prototype.createQuery = function()
 {
-    return new this.EntityQuery_();
+    return this.breeze_.EntityQuery;
 };
 
 /**

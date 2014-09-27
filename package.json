@@ -6,7 +6,7 @@
   "repository": "https://github.com/TomSeldon/handbrake-preset-manager",
   "scripts": {
     "start": "node backend/index.js",
-    "test": "gulp lint karma"
+    "test": "gulp lint:ci karma"
   },
   "author": "Tom Seldon <tom@tomseldon.co.uk>",
   "license": "ISC",
@@ -25,6 +25,7 @@
     "q": "^1.0.1"
   },
   "devDependencies": {
+    "chai": "^1.9.1",
     "chromedriver": "^2.10.0-1",
     "closure-compiler-stream": "^0.1.10",
     "cucumber": "^0.4.4",

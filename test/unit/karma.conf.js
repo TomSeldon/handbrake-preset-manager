@@ -21,7 +21,7 @@ karmaConfig = {
         'bower_components/breezejs/labs/breeze.angular.js',
 
         // Closure
-        'bower_components/closure-library/closure/goog/base.js',
+        'bower_components/closurelibrary/closure/goog/base.js',
 
         // Mocks / setup
         'test/unit/setup.js',
@@ -51,7 +51,7 @@ karmaConfig = {
         },
 
         {
-            pattern: 'bower_components/closure-library/closure/goog/deps.js',
+            pattern: 'bower_components/closurelibrary/closure/goog/deps.js',
             included: false,
             served: false
         }

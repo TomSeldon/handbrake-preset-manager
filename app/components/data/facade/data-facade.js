@@ -3,6 +3,7 @@
 goog.provide('hpm.DataFacade.Service');
 
 /**
+ * @ngInject
  * @param {*} EntityManagerFactory
  * @param {hpm.EntityQueryFactory} EntityQueryFactory
  * @constructor

@@ -35,7 +35,11 @@ describe('DataFacade', function() {
     });
 
     it('should be able to return new query instances', function() {
-        expect(dataFacade.createQuery() instanceof breeze.EntityQuery)
+        expect(dataFacade.createQuery()).toEqual(breeze.EntityQuery);
+
+        var query = dataFacade.createQuery().from('Presets');
+
+        expect(query instanceof breeze.EntityQuery)
             .toBe(true);
     });
 

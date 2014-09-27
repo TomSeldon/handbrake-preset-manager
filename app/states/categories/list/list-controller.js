@@ -5,17 +5,24 @@ goog.provide('hpm.categories.list.Ctrl');
 /**
  * Categories list controller.
  *
- * @param {hpm.data.Service} DataContext
+ * @param {hpm.category.Repository} CategoryRepository
  * @param {hpm.util.logger} logger
  * @constructor
  * @ngInject
  */
-hpm.categories.list.Ctrl = function(DataContext, logger)
+hpm.categories.list.Ctrl = function(CategoryRepository, logger)
 {
     /**
-     * @type {hpm.data.Service}
+     * @private
+     * @type {hpm.category.Repository}
      */
-    this.dataContext = DataContext;
+    this.categoryRepository_ = CategoryRepository;
+
+    /**
+     * @type {hpm.DataFacade.Service}
+     * @private
+     */
+    this.dataContext_ = this.categoryRepository_.getDataContext();
 
     /**
      * @type {hpm.util.logger}
@@ -76,7 +83,7 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
         this.isLoading = false;
     }
 
-    this.dataContext.getCategories()
+    this.categoryRepository_.getAllCategories()
         .then(
             onSuccess.bind(this),
             onError.bind(this)
@@ -92,7 +99,7 @@ hpm.categories.list.Ctrl.prototype.getCategories = function()
  */
 hpm.categories.list.Ctrl.prototype.hasChanges = function()
 {
-    return this.dataContext.hasChanges();
+    return this.dataContext_.hasChanges();
 };
 
 /**
@@ -118,7 +125,7 @@ hpm.categories.list.Ctrl.prototype.cancelChanges = function(category)
  */
 hpm.categories.list.Ctrl.prototype.cancelAllChanges = function()
 {
-    this.dataContext.cancelAllChanges();
+    this.dataContext_.cancelAllChanges();
     this.getCategories();
 };
 
@@ -131,7 +138,7 @@ hpm.categories.list.Ctrl.prototype.saveChanges = function()
 {
     this.isLoading = true;
 
-    this.dataContext.saveChanges()
+    this.dataContext_.saveChanges()
         .then(
             this.saveSuccess.bind(this),
             this.saveFail.bind(this)
@@ -250,7 +257,7 @@ hpm.categories.list.Ctrl.prototype.remove = function(category)
  */
 hpm.categories.list.Ctrl.prototype.createCategory = function()
 {
-    var category = this.dataContext.createCategory();
+    var category = this.categoryRepository_.createCategory();
 
     category.beingEdited = true;
 

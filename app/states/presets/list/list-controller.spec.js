@@ -8,16 +8,8 @@ describe('PresetsListCtrl', function() {
     beforeEach(module(hpm.presets.list.module.name));
 
     beforeEach(inject(function($injector) {
-        var $controller = $injector.get('$controller'),
-            DataContext,
-            logger;
+        var $controller = $injector.get('$controller');
 
-        DataContext = {};
-        logger = {};
-
-        ctrl = $controller('PresetsListCtrl', {
-            DataContext: DataContext,
-            logger: logger
-        });
+        ctrl = $controller('PresetsListCtrl');
     }));
 });
