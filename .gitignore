@@ -1,4 +1,4 @@
-config/index.js
+config/prod.js
 build/js/*.map
 test/unit/coverage/**
 jsdoc

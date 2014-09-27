@@ -29,8 +29,8 @@ The application expects the following collections to exist.
 
 ### Configuration
 
-* Copy `./config/index.js.dist` to `./config/index.js`.
-* Enter config settings into `./config/index.js`.
+* Copy `./config/prod.js.dist` to `./config/prod.js`.
+* Enter config settings into `./config/prod.js`.
 
 ### Run
 
