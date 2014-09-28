@@ -52,7 +52,7 @@ module.exports = {
     define: [
 
         // State debugging
-        'hpm.debug.state.module.HPM_DEBUG_UI_STATE=false'
+        'hpm.DEBUG_UI_STATE=false'
 
     ]
 

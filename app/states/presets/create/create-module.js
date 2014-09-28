@@ -31,7 +31,7 @@ hpm.presets.create.module = angular.module('hpm.presets.create', [
  */
 hpm.presets.create.module.categoriesResolveFn = function(CategoryRepository)
 {
-    return CategoryRepository.getCategories();
+    return CategoryRepository.getAllCategories();
 };
 
 /**
