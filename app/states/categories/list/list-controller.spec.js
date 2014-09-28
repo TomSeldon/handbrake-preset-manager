@@ -8,16 +8,8 @@ describe('CategoriesListCtrl', function() {
     beforeEach(module(hpm.categories.list.module.name));
 
     beforeEach(inject(function($injector) {
-        var $controller = $injector.get('$controller'),
-            DataContext,
-            logger;
+        var $controller = $injector.get('$controller');
 
-        DataContext = {};
-        logger = {};
-
-        ctrl = $controller('CategoriesListCtrl', {
-            DataContext: DataContext,
-            logger: logger
-        });
+        ctrl = $controller('CategoriesListCtrl');
     }));
 });

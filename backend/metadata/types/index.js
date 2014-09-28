@@ -21,6 +21,8 @@ module.exports = {
 
     VideoSettings: require('./Preset/VideoSettings'),
 
-    Preset: require('./Preset/Preset')
+    Preset: require('./Preset/Preset'),
+
+    SizeSettings: require('./Preset/SizeSettings')
 
 };

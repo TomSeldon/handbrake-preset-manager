@@ -29,8 +29,7 @@ angular.module('hpm', [
         hpm.presets.module.name
     ]
 )
-.run(toastrConfig)
-.run(initializeDataContext);
+.run(toastrConfig);
 
 /**
 * Configuration function.
@@ -44,13 +43,3 @@ function toastrConfig(config, toastrConfig) {
     angular.extend(toastrConfig, config.toastr);
 }
 
-/**
-* Initialize the data context with the entities
-* it requires.
-*
-* @ngInject
-* @param {hpm.data.Service} DataContext
-*/
-function initializeDataContext(DataContext) {
-    DataContext.initialize();
-}
