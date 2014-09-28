@@ -27,7 +27,7 @@ gulp.task('protractor', ['webdriver-update'], function() {
     return gulp.src(files)
         // Run Protractor using config file specified
         .pipe(protractor({
-            configFile: './test/e2e/protractor.conf.js'
+            configFile: './test/e2e/protractor.standalone.conf.js'
         }));
 });
 
@@ -38,11 +38,26 @@ gulp.task('protractor', ['webdriver-update'], function() {
  * Listen for error event, and throw an exception if
  * the event listener is fired.
  */
-gulp.task('protractor:standalone', ['webdriver-update'], function() {
+gulp.task('protractor:selenium', ['webdriver-update'], function() {
     return gulp.src(files)
         // Run Protractor using config file specified
         .pipe(protractor({
-            configFile: './test/e2e/selenium.conf.js'
+            configFile: './test/e2e/protractor.selenium.conf.js'
+        }));
+});
+
+/**
+ * Run end-to-end tests using Protractor, with
+ * the config file located at `/test/e2e/selenium.conf.js`.
+ *
+ * Listen for error event, and throw an exception if
+ * the event listener is fired.
+ */
+gulp.task('protractor:saucelabs', function() {
+    return gulp.src(files)
+        // Run Protractor using config file specified
+        .pipe(protractor({
+            configFile: './test/e2e/protractor.saucelabs.conf.js'
         }));
 });
 

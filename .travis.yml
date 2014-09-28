@@ -10,6 +10,9 @@ branches:
 
 sudo: false
 
+addons:
+    sauce_connect: true
+
 services:
     - mongodb
 
@@ -40,4 +43,9 @@ script:
     - gulp lint:ci
     - gulp karma
     - npm start > /dev/null 2>&1 &
-    - gulp protractor
+    - gulp protractor:saucelabs
+
+env:
+  global:
+    - secure: WPMRssl6DmS3ElAH5xXPH0QPxx3Jdl6l9acWsUrGv47F8K3mmV92Lp3/RWdI9qJ0staM82hRtajNU/PXS4GbPgPo9oavX5D6MVsp1HlzyMIgqiX/cbeCfizWfSl/uLP+jWRO7Ts11eGdkFSoC5qVvWhas3q7jD/RE7wk75OqRm4=
+    - secure: OGRe1Yh+0YuMZPtvA8DbTO2B2yUmwELGVh5Qu3COn6mgKaENk8uFW84ICxjdUoLkGOsgWkFsNX2LFHHtJDn/i7hB/Vi6ttDguDQE1DJEv3GYXL28TjNAh9+BWZgkxKookamIg14yLuhKKLA2xkUHH5ddUiIGDEMX7kAt66F6zpU=
