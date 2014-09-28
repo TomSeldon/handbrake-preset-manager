@@ -6,13 +6,13 @@ goog.provide('hpm.category.Repository');
  * Repository for Category entities.
  *
  * @ngInject
- * @param {hpm.data.DataFacade} DataFacade
+ * @param {hpm.DataFacade.Service} DataFacade
  * @constructor
  */
 var CategoryRepository = function(DataFacade)
 {
     /**
-     * @type {hpm.data.DataFacade}
+     * @type {hpm.DataFacade.Service}
      * @private
      */
     this.data_ = DataFacade;
@@ -33,6 +33,14 @@ CategoryRepository.ENTITY_NAME = 'Category';
  * @type {string}
  */
 CategoryRepository.ENTITY_NAME_PLURAL = 'Categories';
+
+/**
+ * @return {hpm.DataFacade.Service}
+ */
+CategoryRepository.prototype.getDataContext = function()
+{
+    return this.data_;
+};
 
 /**
  * Create a new Category and attach to the shared entity manager.
@@ -69,7 +77,8 @@ CategoryRepository.prototype.getCategory = function(id)
 {
     var query;
 
-    query = this.data_.createQuery(CategoryRepository.ENTITY_NAME_PLURAL)
+    query = this.data_.createQuery()
+        .from(CategoryRepository.ENTITY_NAME_PLURAL)
         .where('id_', 'eq', id);
 
     return this.data_.executeQuery(query);

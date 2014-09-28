@@ -3,6 +3,7 @@
 goog.provide('hpm.EntityManagerFactory');
 
 /**
+ * @ngInject
  * @param {breeze} breeze
  * @param {hpm.config} config
  * @constructor

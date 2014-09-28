@@ -15,16 +15,16 @@
   ],
   "dependencies": {
     "angular": "~1.2.21",
+    "angular-ui-router": "~0.2.10",
     "breezejs": "~1.4.16",
     "semantic-ui": "~0.19.0",
     "angular-toastr": "~0.4.0"
   },
   "devDependencies": {
     "closure-compiler": "~0.2.6",
-    "closure-compiler-git": "git@github.com:google/closure-compiler.git#v20140730",
-    "angular-ui-router": "~0.2.10",
+    "closure-compiler-externs": "https://github.com/google/closure-compiler.git#v20140814",
     "angular-mocks": "~1.2.22",
-    "closure-library": "git@github.com:google/closure-library.git#master",
-    "es5-shim": "~4.0.3"
+    "es5-shim": "~4.0.3",
+    "closurelibrary": "*"
   }
 }

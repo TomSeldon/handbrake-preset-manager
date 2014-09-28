@@ -6,13 +6,13 @@ goog.provide('hpm.preset.Repository');
  * Repository for Preset entities.
  *
  * @ngInject
- * @param {hpm.data.DataFacade} DataFacade
+ * @param {hpm.DataFacade.Service} DataFacade
  * @constructor
  */
 var PresetRepository = function(DataFacade)
 {
     /**
-     * @type {hpm.data.DataFacade}
+     * @type {hpm.DataFacade.Service}
      * @private
      */
     this.data_ = DataFacade;
@@ -35,6 +35,14 @@ PresetRepository.ENTITY_NAME = 'Preset';
 PresetRepository.ENTITY_NAME_PLURAL = 'Presets';
 
 /**
+ * @return {hpm.DataFacade.Service}
+ */
+PresetRepository.prototype.getDataContext = function()
+{
+    return this.data_;
+};
+
+/**
  * Create a new Preset and attach to the shared entity manager.
  *
  * @return {Entity}
@@ -53,9 +61,8 @@ PresetRepository.prototype.createPreset = function()
  */
 PresetRepository.prototype.getAllPresets = function()
 {
-    var query = this.data_.createQuery(
-        PresetRepository.ENTITY_NAME_PLURAL
-    );
+    var query = this.data_.createQuery()
+        .from(PresetRepository.ENTITY_NAME_PLURAL);
 
     return this.data_.executeQuery(query);
 };
@@ -70,7 +77,8 @@ PresetRepository.prototype.getPreset = function(id)
 {
     var query;
 
-    query = this.data_.createQuery(PresetRepository.ENTITY_NAME_PLURAL)
+    query = this.data_.createQuery()
+        .from(PresetRepository.ENTITY_NAME_PLURAL)
         .where('id_', 'eq', id);
 
     return this.data_.executeQuery(query);
