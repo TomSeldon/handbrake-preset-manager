@@ -10,3 +10,9 @@ var gulp = require('gulp'),
 gulp.task('karma', function(done) {
     karma.start(karmaConf, done);
 });
+
+gulp.task('karma:tdd', function(done) {
+    karmaConf.singleRun = false;
+
+    karma.start(karmaConf, done);
+});

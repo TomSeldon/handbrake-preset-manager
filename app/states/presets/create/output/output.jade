@@ -6,7 +6,7 @@
             label Output format
                 .ui.left.labeled.icon.input
                     input(
-                        data-ng-model="presetCreate.preset.fileFormat"
+                        data-ng-model="presetCreate.preset.output.fileFormat"
                         type="text"
                     )
 
@@ -21,7 +21,7 @@
                     input(
                         type="checkbox",
                         id="preset_largeFileSize",
-                        data-ng-model="presetCreate.preset.largeFileSize"
+                        data-ng-model="presetCreate.preset.output.largeFileSize"
                     )
                     label(for="preset_largeFileSize")
                         | Large file size
@@ -31,7 +31,7 @@
                     input(
                         type="checkbox",
                         id="preset_webOptimized",
-                        data-ng-model="presetCreate.preset.webOptimized"
+                        data-ng-model="presetCreate.preset.output.webOptimized"
                     )
                     label(for="preset_webOptimized")
                         | Web optimized
@@ -42,7 +42,7 @@
                     input(
                         type="checkbox",
                         id="preset_ipod5gSupport",
-                        data-ng-model="presetCreate.preset.ipod5gSupport"
+                        data-ng-model="presetCreate.preset.output.ipod5gSupport"
                     )
                     label(for="preset_ipod5gSupport")
                         | iPod 5G Support

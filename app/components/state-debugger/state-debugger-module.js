@@ -12,7 +12,7 @@ hpm.debug.state.module = angular.module('hpm.debug.state', []);
 /**
 * @define {boolean} - If enabled, then UI Router debug info is logged.
 */
-hpm.debug.state.module.HPM_DEBUG_UI_STATE = true;
+hpm.DEBUG_UI_STATE = false;
 
 // Register state debug service
 hpm.debug.state.module.service(
@@ -29,7 +29,7 @@ hpm.debug.state.module.service(
 hpm.debug.state.module.runFn = function(StateDebugger)
 {
     // Init the debugging module, if enabled flag set to true
-    if (hpm.debug.state.module.HPM_DEBUG_UI_STATE === true) {
+    if (hpm.DEBUG_UI_STATE === true) {
         StateDebugger.start();
     }
 };
